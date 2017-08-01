@@ -1,0 +1,143 @@
+spring:
+  profiles:
+    active: prod
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: ''
+  http:
+    encoding:
+      charset: UTF-8
+security:
+  enable-csrf: false
+  basic:
+    enabled: false
+server:
+  port: 8092
+  tomcat:
+    uri-encoding: UTF-8
+coupon:
+  amount: 10
+member:
+  invalid: 用户无效
+parkingCoupon:
+  reason: asdf
+key:
+  poster: 7ANIY49L86OID4JB9TBA
+reason:
+  score: 积分需要大于零
+  coupon: 卡券兑换
+  trading: 消费积分
+  admin:
+    score:
+      add: 系统增加
+      minus: 系统扣减
+  manual:
+    add:
+      success: 人工积分成功
+      fail: 人工添加积分失败
+    minus:
+      fail: 人工扣除积分失败
+      success: 人工积分扣减成功，用户积分为：
+---
+spring:
+  profiles: dev
+  thymeleaf:
+    cache: false
+  datasource:
+    schema: classpath:sql/schema.sql
+    data: classpath:sql/data.sql
+    sql-script-encoding: UTF-8
+logging:
+  level:
+    org.springframework.security: INFO
+    org.springframework.web: INFO
+
+---
+spring:
+  profiles: dev1
+  thymeleaf:
+    cache: false
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/jq
+    username: root
+    password: root
+    initialize: false
+    testOnBorrow: true
+    validationQuery: SELECT 1
+  jpa:
+     properties:
+       hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+cache:
+  parking: http://localhost:8090/cache/parking/
+  member: http://localhost:8090/cache/member/
+  giftCoupon: http://localhost:8090/cache/giftCoupon/
+  shopCoupon: http://localhost:8090/cache/shopCoupon/
+  cardRuleUrl: http://localhost:8090/cache/cardRule/
+  shopRuleUrl: http://localhost:8090/cache/shopRule/
+logging:
+  level:
+    org.springframework.security: INFO
+    org.springframework.web: INFO
+---
+spring:
+  profiles: prod
+  thymeleaf:
+    cache: true
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3308/jq
+    username: root
+    password: Jqtm88Abc
+    initialize: false
+    testOnBorrow: true
+    validationQuery: SELECT 1
+  jpa:
+     properties:
+       hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+cache:
+  parking: http://localhost:8090/webService/cache/parking/
+  member: http://localhost:8090/webService/cache/member/
+  giftCoupon: http://localhost:8090/webService/cache/giftCoupon/
+  shopCoupon: http://localhost:8090/webService/cache/shopCoupon/
+  cardRuleUrl: http://localhost:8090/webService/cache/cardRule/
+  shopRuleUrl: http://localhost:8090/webService/cache/shopRule/
+logging:
+  level:
+    org.springframework.security: INFO
+    org.springframework.web: INFO
+---
+spring:
+  profiles: prodTest
+  thymeleaf:
+    cache: false
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://cch.joymap.cn:3308/cch
+    username: root
+    password: Jqtm88Abc
+    initialize: false
+    testOnBorrow: true
+    validationQuery: SELECT 1
+  jpa:
+     properties:
+       hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+cache:
+  parking: http://localhost:8091/cache/parking/
+  member: http://localhost:8091/cache/member/
+  giftCoupon: http://localhost:8091/cache/giftCoupon/
+  shopCoupon: http://localhost:8091/cache/shopCoupon/
+  cardRuleUrl: http://localhost:8091/cache/cardRule/
+  shopRuleUrl: http://localhost:8091/cache/shopRule/
+logging:
+  level:
+    org.springframework.security: INFO
+    org.springframework.web: INFO

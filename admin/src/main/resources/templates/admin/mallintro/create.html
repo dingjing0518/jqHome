@@ -1,0 +1,233 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>商场介绍</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.theme.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/validate.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/datepicker-zh-CN.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/ckeditor/ckeditor.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/ckeditor/adapters/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/fileUpload.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script type="text/javascript" th:src="@{/js/mallintro/create.js}"></script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="member-jfe-wrap container">
+            <div th:class="${message.status}" th:text="${message.message}" th:if="${message!=null}"></div>
+            <div class="show-msg pl70">
+                <form class="form-horizontal pt50" id="form" th:attr="data-id=${mallIntro.id}" th:object="${mallIntro}"
+                      th:method="post">    
+
+                    <div class="form-group imgUp">
+                        <label class="col-md-4 control-label required">项目介绍图1：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{section1Img1}}" alt="点击上传"/>
+                            <input type="file" id="imgUp1"/>
+                            <input type="hidden" th:field="*{section1Img1}"/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-5 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：220像素 * 148像素</label>
+                    </div> 
+                    
+                    <div class="form-group imgUp">
+                        <label class="col-md-4 control-label required">项目介绍图2：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{section1Img2}}" alt="点击上传"/>
+                            <input type="file" id="imgUp2"/>
+                            <input type="hidden" th:field="*{section1Img2}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-5 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：265像素 * 349像素</label>
+                    </div> 
+                    
+                    <div class="form-group imgUp">
+                        <label class="col-md-4 control-label required">项目介绍图3：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{section1Img3}}" alt="点击上传"/>
+                            <input type="file" id="imgUp3"/>
+                            <input type="hidden" th:field="*{section1Img3}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-5 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：240像素 * 192像素</label>
+                    </div> 
+                    
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">项目介绍标题：</label>
+                        <div class="col-md-5">
+                        	<input  class="form-control" type="text" th:field="*{section1Title}"/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">项目介绍描述：</label>
+                        <div class="col-md-5">
+                            <textarea class="form-control" rows="6" th:field="*{section1Content}"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group imgUp">
+                        <label class="col-md-4 control-label required">地理位置图：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{section2Img}}" alt="点击上传"/>
+                            <input type="file" id="imgUp4"/>
+                            <input type="hidden" th:field="*{section2Img}"/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-5 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：220像素 * 148像素</label>
+                    </div> 
+                    
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">地理位置标题：</label>
+                        <div class="col-md-5">
+                        	<input  class="form-control" type="text" th:field="*{section2Title}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">地理位置描述：</label>
+                        <div class="col-md-5">
+                            <textarea class="form-control" rows="6" th:field="*{section2Content}"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group imgUp">
+                        <label class="col-md-4 control-label required">品牌图1：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{section3Img1}}" alt="点击上传"/>
+                            <input type="file" id="imgUp5"/>
+                            <input type="hidden" th:field="*{section3Img1}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-5 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：220像素 * 148像素</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">品牌标题1：</label>
+                        <div class="col-md-5">
+                        	<input  class="form-control" type="text" th:field="*{section3Title1}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">品牌描述1：</label>
+                        <div class="col-md-5">
+                            <textarea class="form-control" rows="6" th:field="*{section3Content1}"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group imgUp">
+                        <label class="col-md-4 control-label required">品牌图2：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{section3Img2}}" alt="点击上传"/>
+                            <input type="file" id="imgUp6"/>
+                            <input type="hidden" th:field="*{section3Img2}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-5 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：220像素 * 148像素</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">品牌标题2：</label>
+                        <div class="col-md-5">
+                        	<input  class="form-control" type="text" th:field="*{section3Title2}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">品牌描述2：</label>
+                        <div class="col-md-5">
+                            <textarea class="form-control" rows="6" th:field="*{section3Content2}"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group imgUp">
+                        <label class="col-md-4 control-label required">品牌图3：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{section3Img3}}" alt="点击上传"/>
+                            <input type="file" id="imgUp7"/>
+                            <input type="hidden" th:field="*{section3Img3}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-5 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：220像素 * 148像素</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">品牌标题3：</label>
+                        <div class="col-md-5">
+                        	<input  class="form-control" type="text" th:field="*{section3Title3}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">品牌描述3：</label>
+                        <div class="col-md-5">
+                            <textarea class="form-control" rows="6" th:field="*{section3Content3}"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group imgUp">
+                        <label class="col-md-4 control-label required">愿景图：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{section4Img}}" alt="点击上传"/>
+                            <input type="file" id="imgUp8"/>
+                            <input type="hidden" th:field="*{section4Img}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-5 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：220像素 * 148像素</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">愿景标题：</label>
+                        <div class="col-md-5">
+                        	<input  class="form-control" type="text" th:field="*{section4Title}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">愿景描述：</label>
+                        <div class="col-md-5">
+                            <textarea class="form-control" rows="6" th:field="*{section4Content}"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="group-ft col-xs-offset-4 mt50">
+                        <a th:href="@{/admin/mallintro}" class="btn btn-default ml50">返回</a>
+                        <input type="submit" class="btn btn-success ml-40" value="确认"/>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

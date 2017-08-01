@@ -1,0 +1,89 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>业态管理列表</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/bootstrap-timepicker.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jsRender.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/page.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script id="detail" type="text/x-jsrender">
+		{{for content}}
+		<tr>
+		    <td><a href="/crm/admin/shops/{{>id}}">{{>name}}</a></td>  
+		    <td>{{>key}}</td>  
+		    <td>{{>updateTime}}</td>
+			<td>{{if valid=='VALID'}}正常{{else}}冻结{{/if}}</td>
+        </tr>	
+		{{/for}}
+    </script>
+    <script>
+        $(function () {
+            var submitFn = function (data) {
+                var tmpl = $.templates("#detail");
+                var html = tmpl.render(data.obj);
+                $('table tbody').children().remove();
+                $('table tbody').html(html);
+            };
+
+            var parameterFn = function () {
+                return {}
+            };
+
+        });
+    </script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="shop-wrap container">
+            <div class="hd clearfix">
+                <div class="bar base-bar short-bar pull-left">业态管理</div>
+                <a th:href="@{/admin/shopCategories?form}" class="btn btn-info">
+                    添加
+                </a>
+            </div>
+            <table class="table table-striped bg-white mt25">
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>创建时间</th>
+                    <th>创建人</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="c:${list}">
+                    <td><a th:text="${c.name}" th:href="@{/admin/shopCategories/__${c.id}__}"></a></td>
+                    <td th:text="${#calendars.format(c.createdTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:text="${c.createdBy}"></td>
+                    <td th:text="${c.valid.toString()=='INVALID'}?冻结:正常"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('.datepicker').datepicker();
+    })
+</script>
+</body>
+</html>

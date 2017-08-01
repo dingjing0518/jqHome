@@ -1,0 +1,79 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>活动管理</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.theme.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/validate.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/datepicker-zh-CN.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/ckeditor/ckeditor.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/ckeditor/adapters/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/fileUpload.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script type="text/javascript" th:src="@{/js/activity/create.js}"></script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="member-jfe-wrap container">
+            <div th:class="${message.status}" th:text="${message.message}" th:if="${message!=null}"></div>
+            <div class="show-msg pl70">
+                <form class="form-horizontal pt50" id="form" th:attr="data-id=${activity.id}" th:object="${activity}"
+                      th:method="post">    
+
+                    <div class="form-group imgUp">
+                        <label class="col-md-4 control-label required">活动图片：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{activityImg}}" alt="点击上传"/>
+                            <input type="file" id="imgUp1"/>
+                            <input type="hidden" th:field="*{activityImg}"/>
+                        </div>
+                    </div>
+                      <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-5 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：517像素 * 223像素</label>
+                    </div>
+                     
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">活动名称：</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" th:field="*{name}"/>
+                            <i class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">必填</i>
+                        </div>
+                    </div>
+                  	 <div class="form-group">
+                        <label class="col-md-4 control-label">活动排序：</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" th:field="*{sort}"  placeholder="活动排序"/>
+                            <i class="error" th:if="${#fields.hasErrors('sort')}" th:errors="*{sort}">必填</i>
+                        </div>
+                    </div>
+                    <div class="group-ft col-xs-offset-4 mt50">
+                        <a th:href="@{/admin/activity}" class="btn btn-default ml50">返回</a>
+                        <input type="submit" class="btn btn-success ml-40" value="确认"/>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

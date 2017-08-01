@@ -1,0 +1,82 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>会员卡积分</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jsRender.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/page.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script id="detail" type="text/x-jsrender">
+		{{for content}}
+		<tr>
+			<td><a href="/crm/admin/cardRules/{{>id}}"><img src="{{>coverImg}}" style="width:200px;height:100px"/></a></td>
+			<td>{{>href}}</td>
+			<td>{{>createdTime}}</td>
+		</tr>
+		{{/for}}
+    </script>
+	<script type="text/javascript">
+		$(function () {
+			var submitFn = function (data) {
+				var tmpl = $.templates("#detail");
+				var html = tmpl.render(data.obj);
+				$('table tbody').children().remove();
+				$('table tbody').html(html);
+			};
+			
+			var mall=window.location.pathname.split('/')[2];
+
+			$('ul.pagination').pageable({
+				url: global.context + '/admin/'+mall+'/films/json',
+				fn: submitFn
+			});
+		})
+	</script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="member-jfe-wrap container">
+            <div class="hd clearfix">
+                <div class="bar base-bar short-bar pull-left">电影海报管理</div>
+                <a class="btn btn-info" th:href="@{/admin/__${mall}__/films?form}">添加</a>
+            </div>
+            <table class="table table-striped bg-white">
+                <thead>
+                <tr>
+                    <th>图片</th>
+                    <th>超链接</th>
+                    <th>创建日期</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="r:${lists}">
+                    <td><a th:href="@{/admin/__${mall}__/films/__${r.id}__}"><img th:src="${r.coverImg}" style="width:200px;height:100px"/></a></td>
+                    <td th:text="${r.href}"></td>
+                    <td th:text="${r.createdTime}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="pagination-wrap">
+                <div th:replace="admin/layout/page::page"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

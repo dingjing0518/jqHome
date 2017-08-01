@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<link type="image/x-icon" rel="shortcut icon"
+	th:href="@{/images/logo.ico}" />
+<link rel="Bookmark" th:href="@{/images/logo.ico}" />
+<!--[if lt IE 9]>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,chrome=1">
+		<![endif]-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1">
+		-->
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- Bootstrap -->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/non-responsive.min.css}" />
+<link rel="stylesheet" th:href="@{/css/common.css}" />
+<link rel="stylesheet" th:href="@{/css/swiper.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/jq.css}" />
+<link rel="stylesheet" th:href="@{/css/wap.css}" />
+<link rel="stylesheet" media="screen and (max-width:700px)"
+	th:href="@{/css/moblie.css}" />
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/swiper.jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+<title>金桥太茂官方网站-关于我们</title>
+</head>
+<body>
+	<header th:replace="include/header::header-about"></header>
+	<div class="banner about mt110 sitecontent transform" th:src="${aboutUs.topBackgroundImg}" th:data="${aboutUs.moblieTopBackgroundImg}"></div>
+	<div class="contain sitecontent transform">
+		<div class="ab_box">
+			<div class="ab_em">
+				<i class="iconfont">&#xe606;</i>
+				<p th:text="${aboutUs.email}">vip@jq-taimall.com</p>
+			</div>
+			<div class="ab_ph">
+				<i class="iconfont">&#xe605;</i>
+				<p th:text="${aboutUs.phone}">021-31778120</p>
+			</div>
+			<div class="ab_ding">
+				<i class="iconfont view-map" id="sh" data-toggle="modal"
+					data-target="#shModal">&#xe607;</i>
+				<p th:text="${aboutUs.address}">中国上海浦东新区金高路1882号</p>
+			</div>
+			<div class="ab_last">
+				<div class="pull-left">
+					<img th:src="${aboutUs.iconLogoImg}" />
+				</div>
+				<p th:text="${aboutUs.invested}">Invested by CCH</p>
+			</div>
+		</div>
+	</div>
+	<div th:replace="include/footer::footer-about"></div>
+	<script type="text/javascript"></script>
+	<div id="share_pc"></div>
+	<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan style='display:none;' id='cnzz_stat_icon_1260372880'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D1260372880' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+</body>
+<script type="text/javascript" th:src="@{/js/aboutus/swiper.js}"></script>
+</html>

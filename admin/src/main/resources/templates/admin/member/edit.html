@@ -1,0 +1,411 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>会员管理详细页</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.theme.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jsRender.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/page.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/confirm.js}"></script>
+    <script type="text/javascript" th:src="@{/js/member/edit.js}"> </script>
+    <script id="use-tmpl" type="text/x-jsrender">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-3 control-label">会员卡：</label>
+				<select class="form-control w120" th:field="*{card}">
+                        <option value="">--请选择--</option>
+                        <option th:each="c : ${allCards}" th:value="${c.id}" th:text="${c.name}">name</option>
+                </select>
+                <div class="col-md-3 padd5 text-center">{{:cardName}}</div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">注册日期：</label>
+                <div class="col-md-3 padd5 text-center">{{:createdTime}}</div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">消费金额：</label>
+                <div class="col-md-3 padd5 text-center">{{:amount}}</div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">消费次数：</label>
+                <div class="col-md-3 padd5 text-center">{{:count}}</div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">总积分：</label>
+                <div class="col-md-3 padd5 text-center" id="sumScore">{{:sumScore}}</div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">可用积分：</label>
+                <div class="col-md-3 padd5 text-center">
+                  <span class="item-amount ">
+                    <a class="minus" id='minus-button'>
+                        <i class="icon icon-miuns" data-toggle="modal" data-target=".modal-jf-miuns"></i>
+                    </a>
+                    <input type="text" id="availableScore" value="{{:availableScore}}"/>
+                    <a class="plus" style="padding-top:1.5px">
+                        <i class="icon icon-plus" data-toggle="modal" data-target=".modal-jf-plus"></i>
+                    </a>
+                  </span>
+                </div>
+            </div>
+        </form>
+    </script>
+    <script id="trading-tmpl" type="text/x-jsrender">
+        <table class="table table-striped bg-white" id='tradingTable'>
+            <thead>
+            <tr>
+                <th>消费时间</th>
+                <th>消费店铺</th>
+                <th>消费金额</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{for content}}
+            <tr>
+                <td>{{>createdTime}}</td>
+                <td>{{>shopName}}</td>
+                <td>{{>amount}}</td>
+            </tr>
+            {{/for}}
+            </tbody>
+        </table>
+        <div class="pagination-wrap">
+            <ul class="pagination" id="tradingPage">
+            </ul>
+        </div>
+    </script>
+    <script id="trading-row" type="text/x-jsrender">
+        {{for content}}
+            <tr>
+                <td>{{>createdTime}}</td>
+                <td>{{>shopName}}</td>
+                <td>{{>amount}}</td>
+            </tr>
+        {{/for}}
+    </script>
+    <script id="score-tmpl" type="text/x-jsrender">
+		<table class="table table-striped bg-white" id="scoreTable">
+			<thead>
+			<tr>
+				<th>变更时间</th>
+				<th>积分变动</th>
+				<th>描述</th>
+			</tr>
+			</thead>
+			<tbody>
+			{{for content}}
+			<tr>
+				<td>{{>createdTime}}</td>
+				<td>{{>deposit}}</td>
+				<td>{{>reason}}</td>
+			</tr>
+			{{/for}}
+			</tbody>
+		</table>
+		<div class="pagination-wrap">
+			<ul class="pagination" id='scorePage'>
+			</ul>
+		</div>
+    </script>
+    <script id="score-row" type="text/x-jsrender">
+        {{for content}}
+            <tr>
+                <td>{{>createdTime}}</td>
+                <td>{{>deposit}}</td>
+                <td>{{>reason}}</td>
+            </tr>
+        {{/for}}
+    </script>
+    <script id="parking-tmpl" type="text/x-jsrender">
+		<table class="table table-striped bg-white" id="parkingTable">
+			<thead>
+			<tr>
+				<th>进场时间</th>
+				<th>出场时间</th>
+				<th>支付车牌</th>
+				<th>金额</th>
+			</tr>
+			</thead>
+			<tbody>
+			{{for content}}
+			<tr>
+				<td>{{>startTime}}</td>
+				<td>{{>endTime}}</td>
+				<td>{{>license}}</td>
+				<td>{{>amount}}</td>
+			</tr>
+			{{/for}}
+			</tbody>
+		</table>
+		<div class="pagination-wrap">
+			<ul class="pagination" id="parkingPage">
+			</ul>
+		</div>
+    </script>
+    <script id="shopCoupons-tmpl" type="text/x-jsrender">
+		<table class="table table-striped bg-white" id="shopCouponsTable">
+			<thead>
+			<tr>
+				<th>获得时间</th>
+				<th>使用时间</th>
+				<th>店铺名称</th>
+				<th>卡券名称</th>
+			</tr>
+			</thead>
+			<tbody>
+			{{for content}}
+			<tr>
+				<td>{{>exchangedTime}}</td>
+				<td>{{>usedTime}}</td>
+				<td>{{>shopName}}</td>
+				<td>{{>name}}</td>
+			</tr>
+			{{/for}}
+			</tbody>
+		</table>
+		<div class="pagination-wrap">
+			<ul class="pagination" id="shopCouponsPage">
+			</ul>
+		</div>
+    </script>
+    <script id="shopCoupons-row" type="text/x-jsrender">
+			{{for content}}
+			<tr>
+				<td>{{>exchangedTime}}</td>
+				<td>{{>usedTime}}</td>
+				<td>{{>shopName}}</td>
+				<td>{{>name}}</td>
+			</tr>
+			{{/for}}
+    </script>
+    <script id="giftCoupons-tmpl" type="text/x-jsrender">
+		<table class="table table-striped bg-white" id="giftCouponsTable">
+			<thead>
+			<tr>
+				<th>获得时间</th>
+				<th>使用时间</th>
+				<th>卡券名称</th>
+			</tr>
+			</thead>
+			<tbody>
+			{{for content}}
+			<tr>
+				<td>{{>exchangedTime}}</td>
+				<td>{{>usedTime}}</td>
+				<td>{{>name}}</td>
+			</tr>
+			{{/for}}
+			</tbody>
+		</table>
+		<div class="pagination-wrap">
+			<ul class="pagination" id="giftCouponsPage">
+			</ul>
+		</div>
+    </script>
+    <script id="giftCoupons-row" type="text/x-jsrender">
+			{{for content}}
+			<tr>
+				<td>{{>exchangedTime}}</td>
+				<td>{{>usedTime}}</td>
+				<td>{{>name}}</td>
+			</tr>
+			{{/for}}
+    </script>
+    <script id="parkingCoupons-tmpl" type="text/x-jsrender">
+		<table class="table table-striped bg-white" id="parkingCouponsTable">
+			<thead>
+			<tr>
+				<th>时间</th>
+				<th>使用张数</th>
+				<th>卡券名称</th>
+			</tr>
+			</thead>
+			<tbody>
+			{{for content}}
+			<tr>
+				<td>{{:created}}</td>
+				<td>{{:total}}</td>
+				<td>{{:couponName}}</td>
+			</tr>
+			{{/for}}
+			</tbody>
+		</table>
+		<div class="pagination-wrap">
+			<ul class="pagination" id="parkingCouponsPage">
+			</ul>
+		</div>
+    </script>
+    <script id="parkingCoupons-row" type="text/x-jsrender">
+			{{for content}}
+			<tr>
+				<td>{{:created}}</td>
+				<td>{{:total}}</td>
+				<td>{{:couponName}}</td>
+			</tr>
+			{{/for}}
+    </script>
+    <script id="parking-row" type="text/x-jsrender">
+		{{for content}}
+		<tr>
+			<td>{{:startTime}}</td>
+			<td>{{:endTime}}</td>
+			<td>{{:license}}</td>
+			<td>{{:amount}}</td>
+		</tr>
+		{{/for}}
+    </script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="mem-manage-detail">
+            <ul class="nav nav-tabs">
+                <li class="base active">
+                    <a data-toggle="tab" href="#t1">基本信息
+                    </a>
+                </li>
+                <li class="base">
+                    <a data-toggle="tab" id="useFlow" href="#t2" th:attr="data-id=${member.id}">使用情况
+                    </a>
+                </li>
+                <li class="base">
+                    <a data-toggle="tab" id="tradingFlow" href="#t3" th:attr="data-id=${member.id}">消费记录
+                    </a>
+                </li>
+                <li class="base">
+                    <a data-toggle="tab" id="scoreFlow" href="#t4" th:attr="data-id=${member.id}">积分记录
+                    </a>
+                </li>
+                <li class="base">
+                    <a data-toggle="tab" id="parkingFlow" href="#t5" th:attr="data-id=${member.id}">停车记录
+                    </a>
+                </li>
+                <li class="base">
+                    <a data-toggle="tab" id="giftCouponsFlow" href="#t6" th:attr="data-id=${member.id}">礼品券记录
+                    </a>
+                </li>
+                <li class="base">
+                    <a data-toggle="tab" id="shopCouponsFlow" href="#t7" th:attr="data-id=${member.id}">商铺券记录
+                    </a>
+                </li>
+                <li class="base">
+                    <a data-toggle="tab" id="parkingCouponsFlow" href="#t8" th:attr="data-id=${member.id}">停车券记录
+                    </a>
+                </li>
+            </ul>
+           	<div th:if="${message!=null}" th:class="${message.status}" th:text="${message.message}"></div>
+            <div class="tab-content">
+                <div id="t1" class="tab-pane active">
+                    <form class="form-horizontal" th:action="@{/admin/members/__${member.id}__/validate}" th:method="put" id="validForm">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">姓名：</label>
+                            <div class="col-md-3 padd5 text-center" th:text="${member.memberDetail.realName}">Jessica
+                                Foster
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">手机号：</label>
+                            <div class="col-md-3 padd5 text-center" th:text="${member.name}">13454672334</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">身份证号码：</label>
+                            <div class="col-md-3 padd5 text-center"
+                                 th:text="${member.ic}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">出生年月：</label>
+                            <div class="col-md-3 padd5 text-center"
+                                 th:text="${member.memberDetail.birthday==null?'':#dates.format(member.memberDetail.birthday, 'yyyy-MM-dd')}">1992/01/01
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">详细地址：</label>
+                            <div class="col-md-3 padd5 text-center" th:text="${member.memberDetail.address}" style="padding-top: 6px;">
+                                上海市黄浦区建国西路
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input id="valid" type="button" class="col-xs-offset-4 btn btn-danger" data-toggle="modal"
+                                   data-target=".modal-md" value="加入黑名单" th:attr="member=${member.id}"
+                                   th:if="${member.valid.toString()=='VALID'}"/>
+                            <input id="valid" type="button" class="col-xs-offset-4 btn btn-danger" data-toggle="modal"
+                                   data-target=".modal-md" value="从黑名单移出" th:attr="member=${member.id}"
+                                   th:if="${member.valid.toString()=='INVALID'}"/>
+                        </div>
+                    </form>
+                </div>
+                <div id="t2" class="tab-pane">
+                </div>
+                <div id="t3" class="tab-pane">
+                </div>
+                <div id="t4" class="tab-pane">
+                </div>
+                <div id="t5" class="tab-pane">
+                </div>
+                <div id="t6" class="tab-pane">
+                </div>
+                <div id="t7" class="tab-pane">
+                </div>
+                <div id="t8" class="tab-pane">
+                </div>
+            </div>
+
+            <!--modal start-->
+			<div id="dialog-confirm" title="" th:attr="title=${member.valid.toString()=='VALID'}?'请确认是否将以下会员加入黑名单':'请确认是否将以下会员移出黑名单'">
+			  <p th:text="${member.name}"></p>
+			</div>
+            <!--modal end-->
+            <!--modal 积分加 start-->
+            <div th:attr="member=${member.id}" title="增加积分" id="dialog-add" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            	<form>
+            		<input type="text" id="addScore" name="addScore"/>
+            	</form>
+            </div>
+            <!--modal 积分 end-->
+
+            <!--modal 积分减 start-->
+            <div th:attr="member=${member.id}" id="dialog-minus" role="dialog" aria-labelledby="mySmallModalLabel" title="扣减积分">
+            	<form>
+            		<input type="text" id="minusScore" name="minusScore"/>
+            	</form>
+            </div>
+            <!--modal 积分 end-->
+        </div>
+    </div>
+</div>
+<div id="alert" th:if="${status}!=null">
+    <div class="success-modal">
+        <div class="show-msg">
+            <div class="alert alert-success" role="alert">
+                设置成功
+            </div>
+            <div class="success-bg">
+                <img src="/img/icon-success.jpg"/>
+            </div>
+        </div>
+    </div>
+    <div class="fixed"></div>
+</div>
+<div class="alert alert-success" role="alert">核销成功</div>
+<div class="alert alert-danger" role="alert">核销失败</div>
+</body>
+</html>

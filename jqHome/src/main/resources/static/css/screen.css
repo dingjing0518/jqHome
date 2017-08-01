@@ -1,0 +1,99 @@
+@media screen and (min-width: 1500px){
+.wrap,.footer{
+	width:1420px;
+}
+}
+@media screen and (max-width: 1500px) and (min-width: 1200px){
+.wrap,
+.footer,#allmap{
+	width:1100px;
+}
+.picScroll-left{
+	width:96.5%;
+}
+.picScroll-left .bd ul li{
+	margin:0 7px;
+}
+.picScroll-left .hd .next{
+	right:-1px;
+}
+.picScroll-left .hd .prev{
+	left:7px;
+}
+
+}
+@media screen and (max-width: 1200px) and (min-width: 700px){
+.wrap,.footer{
+	width:987px;
+}
+.meun{
+	margin-right:0;
+}
+.logo{
+	margin-left:0;
+}
+.mztk-txt{
+	width:57%;
+}
+.contact-way span{
+	width:32%;
+}
+
+.scdw-pic{
+	width:33%;
+	height:350px;
+	overflow:hidden;
+}
+.scdw-msg {
+	width:67%;
+}
+.xmtd-pic,.sytz-txt{
+	width:45.5%;
+}
+.xmtd-txt,.sytz-pic{
+	width:54%;
+}
+.shop-wrap #scrollbar1{
+	width:94%;
+	margin-left:4%;
+}
+.tzpic{
+	width:49%;
+}
+.tztiaomu{
+	width:40%;
+}
+.shop-wrap #scrollbar2{
+	width:100%;
+}
+.shop-wrap #scrollbar2 .viewport{
+	width:95%;
+}
+.picScroll-left{
+	width:96.5%;
+}
+.picScroll-left .bd ul li{
+	margin:0 7px;
+}
+.picScroll-left .hd .next{
+	right:-1px;
+}
+.picScroll-left .hd .prev{
+	left:7px;
+}
+}
+@media screen and (max-width: 1000px){
+	.wrap, .footer{
+		width:100%;
+	}
+	.event-list a{
+		width:32.9%;
+	}
+	.shop-layout{
+		padding:80px 25px;
+	}
+	.s-nav a{
+		padding:0 15px;
+		font-size:30px;
+	}
+}

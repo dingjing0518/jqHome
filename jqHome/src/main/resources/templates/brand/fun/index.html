@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no" />
+		<link type="image/x-icon" rel="shortcut icon" th:href="@{/images/logo.ico}" />
+		<link rel="Bookmark" th:href="@{/images/logo.ico}" />
+		<!--[if lt IE 9]>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,chrome=1">
+		<![endif]-->
+		<!--<meta name="viewport" content="width=device-width, initial-scale=1">
+		-->
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+		<link rel="stylesheet" href="css/non-responsive.min.css" th:href="@{/css/non-responsive.min.css}"/>
+		<link rel="stylesheet" href="css/common.css" th:href="@{/css/common.css}"/>
+		<link rel="stylesheet" href="css/swiper.min.css" th:href="@{/css/swiper.min.css}"/>
+		<link rel="stylesheet" type="text/css" href="css/jq.css" th:href="@{/css/jq.css}"/>
+		<link rel="stylesheet" href="css/wap.css" th:href="@{/css/wap.css}"/>
+        <link rel="stylesheet" media="screen and (max-width:700px)" href="css/moblie.css" th:href="@{/css/moblie.css}" />
+		<script type="text/javascript" src="js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+		<script type="text/javascript" src="js/swiper.jquery.min.js" th:src="@{/js/swiper.jquery.min.js}"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" src="js/wookmark.js" th:src="@{/js/wookmark.js}"></script>
+		<script type="text/javascript" src="js/imagesloaded.pkgd.min.js" th:src="@{/js/imagesloaded.pkgd.min.js}"></script>
+		<script type="text/javascript" src="js/script.js" th:src="@{/js/script.js}"></script>
+		<title>金桥太茂官方网站-品牌</title>
+	</head>
+	<body>		
+		<header th:replace="include/header::header-brand-fun"></header>
+		<div th:replace="include/header::brand-fun-title"></div>
+		<div th:replace="include/header::brand-fun-nav"></div>
+		
+		<div class="contain sitecontent transform">
+			<div class="act_box hoverscale clearfix" style="margin-top:0px;">
+				<div class="retail_lf activity_lf activity_2">
+					<div class="activity tile-loading" th:each="brand,iterStat:${recommandBrands}" th:classappend="${iterStat.index==0}? 'hottag'">
+						<img src="img/retail1.jpg" th:src="${brand.specialImg}"/>
+						<div class="text-bottom">
+							<p class="tb-t" th:utext="${brand.name}"></p>
+							<p class="tb-d" th:utext="${brand.address}">L1-114</p>
+						</div>
+					</div>
+					
+				</div>
+				<div class="retail_rt">
+					<ul class="hoverscale">
+						<li class="activity tile-loading" th:each="brand,iterStat:${otherBrands}">
+							<img src="img/retail3.jpg" height="380"  th:src="${brand.specialImg}"/>
+							<div class="text-bottom">
+								<p class="tb-t" th:utext="${brand.name}">Kiss Ring</p>
+								<p class="tb-d" th:utext="${brand.address}">L1-113</p>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+			
+			 <div class="retail_box" style="position:relative">
+				
+				<div class="retail_bottom">
+					<ul class="hoverscale">
+						<li class="activity tile-loading" th:each="brand,iterStat:${brands}"><img  src="img/优衣库b.png" th:src="${brand.isBigImg==1}?${brand.bigImg}:${brand.smallImg}"/><div class="text-bottom"><p class="tb-t" th:text="${brand.name}">优衣库</p><p class="tb-d" th:text="${brand.address}">L1-117</p></div></li>
+					</ul>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		
+		
+	<footer th:replace="include/footer::footer-brand-fun"></footer>
+	<div id="share_pc"></div>
+	</body>
+	<script type="text/javascript" th:src="@{/js/brand/fun/index.js}">
+	</script>
+</html>

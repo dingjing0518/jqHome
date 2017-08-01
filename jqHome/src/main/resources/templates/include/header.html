@@ -1,0 +1,212 @@
+<!-- 首页 -->
+<header th:fragment="header-index" class="index-header">
+	<div class="innerHeader clearfix">
+		<a href="index.html" th:href="@{/}" class="logo sitecontent transform">
+			<img src="img/logo.jpg" th:src="@{/images/logo.jpg}" />
+		</a>
+		<nav>
+			<a href="activity.html" th:href="@{/activity/}">活动</a> <a
+				href="brand.html" th:href="@{/brand/}">品牌</a> <a href="vip.html"
+				th:href="@{/vip/}">会员</a> <a href="aboutus.html"
+				th:href="@{/aboutus/}">关于我们</a>
+		</nav>
+		<div class="nav-btn sitecontent transform"></div>
+	</div>
+</header>
+<!-- 关于我们 -->
+<header th:fragment="header-about">
+	<div class="innerHeader">
+		<a th:href="@{/}" class="logo sitecontent transform"> <img
+			th:src="@{/images/logo.jpg}" />
+		</a>
+		<nav>
+			<a th:href="@{/activity/}">活动</a> <a th:href="@{/brand/}">品牌</a> <a
+				th:href="@{/vip/}">会员</a> <a th:href="@{/aboutus/}" class="active">关于我们</a>
+		</nav>
+		<div class="nav-btn sitecontent transform"></div>
+	</div>
+</header>
+<!-- 活动 -->
+<header th:fragment="header-activity">
+	<div class="innerHeader">
+		<a th:href="@{/}" class="logo sitecontent transform"> <img
+			th:src="@{/images/logo.jpg}" />
+		</a>
+		<nav>
+			<a th:href="@{/activity/}" class="active">活动</a> <a th:href="@{/brand/}">品牌</a> <a
+				th:href="@{/vip/}">会员</a> <a th:href="@{/aboutus/}">关于我们</a>
+		</nav>
+		<div class="nav-btn sitecontent transform"></div>
+	</div>
+</header>
+<!-- 会员 -->
+<header th:fragment="header-vip">
+	<div class="innerHeader">
+		<a th:href="@{/}" class="logo sitecontent transform"> <img
+			th:src="@{/images/logo.jpg}" />
+		</a>
+		<nav>
+			<a th:href="@{/activity/}">活动</a> <a th:href="@{/brand/}">品牌</a> <a
+				th:href="@{/vip/}" class="active">会员</a> <a th:href="@{/aboutus/}">关于我们</a>
+		</nav>
+		<div class="nav-btn sitecontent transform"></div>
+	</div>
+</header>
+<!-- 品牌-全部-->
+<header th:fragment="header-brand" style="position: fixed; top: 0px;">
+	<div class="innerHeader">
+		<a href="index.html" th:href="@{/}" class="logo sitecontent transform">
+			<img th:src="@{/images/logo.jpg}" />
+		</a>
+		<nav>
+			<a href="activity.html" th:href="@{/activity/}">活动</a> <a
+				href="brand.html" class="active" th:href="@{/brand/}">品牌</a> <a
+				href="vip.html" th:href="@{/vip/}">会员</a> <a href="aboutus.html"
+				th:href="@{/aboutus/}">关于我们</a>
+		</nav>
+		<div class="nav-btn sitecontent transform"></div>
+	</div>
+</header>
+<div th:fragment="brand-all-title"
+	class="nav-brand sitecontent transform">
+	<div class="bnav-hd clearfix">
+		<a class="" href="brand.html" th:href="@{/brand/}">全部</a>
+		<div class="bnav-btn pull-right"></div>
+	</div>
+</div>
+<div th:fragment="brand-all-nav" class="filmheader">
+	<nav>
+		<a href="brand.html" class="active" th:href="@{/brand/}">全部</a> <a
+			href="food.html" th:href="@{/brand/food/}">餐饮</a> <a
+			href="retail.html" th:href="@{/brand/retail/}">零售</a> <a
+			href="activity_2.html" th:href="@{/brand/fun/}">娱乐生活</a> <a
+			href="child.html" th:href="@{/brand/child/}">儿童亲子</a>
+	</nav>
+</div>
+<!-- 品牌-餐饮-->
+<header th:fragment="header-brand-food">
+	<div class="innerHeader">
+		<a href="index.html" th:href="@{/}" class="logo"> <img
+			th:src="@{/images/logo.jpg}" />
+		</a>
+		<nav>
+			<a href="activity.html" th:href="@{/activity/}">活动</a> <a
+				href="brand.html" class="active" th:href="@{/brand/}">品牌</a> <a
+				href="vip.html" th:href="@{/vip/}">会员</a> <a href="aboutus.html"
+				th:href="@{/aboutus/}">关于我们</a>
+		</nav>
+		<div class="nav-btn"></div>
+	</div>
+</header>
+<div th:fragment="brand-food-title"
+	class="nav-brand sitecontent transform">
+	<div class="bnav-hd clearfix">
+		<a class="" href="brand.html" th:href="@{/brand/}">全部</a>
+		<div class="bnav-btn pull-right"></div>
+	</div>
+</div>
+<div th:fragment="brand-food-nav" class="filmheader">
+	<nav>
+		<a href="brand.html" th:href="@{/brand/}">全部</a> <a href="food.html"
+			th:href="@{/brand/food/}" class="active">餐饮</a> <a
+			href="retail.html" th:href="@{/brand/retail/}">零售</a> <a
+			href="activity_2.html" th:href="@{/brand/fun/}">娱乐生活</a> <a
+			href="child.html" th:href="@{/brand/child/}">儿童亲子</a>
+	</nav>
+</div>
+<!-- 品牌-零售 -->
+<header th:fragment="header-brand-retail">
+	<div class="innerHeader">
+		<a href="index.html" th:href="@{/}" class="logo"> <img
+			th:src="@{/images/logo.jpg}" />
+		</a>
+		<nav>
+			<a href="activity.html" th:href="@{/activity/}">活动</a> <a
+				href="brand.html" class="active" th:href="@{/brand/}">品牌</a> <a
+				href="vip.html" th:href="@{/vip/}">会员</a> <a href="aboutus.html"
+				th:href="@{/aboutus/}">关于我们</a>
+		</nav>
+		<div class="nav-btn sitecontent transform"></div>
+	</div>
+</header>
+<div th:fragment="brand-retail-title"
+	class="nav-brand sitecontent transform">
+	<div class="bnav-hd clearfix">
+		<a class="active" href="retail.html" th:href="@{/brand/retail/}">零售</a>
+		<div class="bnav-btn pull-right"></div>
+	</div>
+</div>
+<div th:fragment="brand-retail-nav" class="filmheader">
+	<nav>
+		<a href="brand.html" th:href="@{/brand/}">全部</a> <a href="food.html"
+			th:href="@{/brand/food/}">餐饮</a> <a href="retail.html"
+			th:href="@{/brand/retail/}" class="active">零售</a> <a
+			href="activity_2.html" th:href="@{/brand/fun/}">娱乐生活</a> <a
+			href="child.html" th:href="@{/brand/child/}">儿童亲子</a>
+	</nav>
+</div>
+<!-- 品牌-娱乐生活-->
+<header th:fragment="header-brand-fun">
+	<div class="innerHeader">
+		<a href="index.html" th:href="@{/}" class="logo"> <img
+			th:src="@{/images/logo.jpg}" />
+		</a>
+		<nav>
+			<a href="activity.html" th:href="@{/activity/}">活动</a> <a
+				href="brand.html" class="active" th:href="@{/brand/}">品牌</a> <a
+				href="vip.html" th:href="@{/vip/}">会员</a> <a href="aboutus.html"
+				th:href="@{/aboutus/}">关于我们</a>
+		</nav>
+		<div class="nav-btn sitecontent transform"></div>
+	</div>
+</header>
+<div th:fragment="brand-fun-title"
+	class="nav-brand sitecontent transform">
+	<div class="bnav-hd clearfix">
+		<a class="active" href="activity_2.html" th:href="@{/brand/fun/}">娱乐生活</a>
+		<div class="bnav-btn pull-right"></div>
+	</div>
+</div>
+<div th:fragment="brand-fun-nav" class="filmheader">
+	<nav>
+		<a href="brand.html" th:href="@{/brand/}">全部</a> <a href="food.html"
+			th:href="@{/brand/food/}">餐饮</a> <a href="retail.html"
+			th:href="@{/brand/retail/}">零售</a> <a href="activity_2.html"
+			th:href="@{/brand/fun/}" class="active">娱乐生活</a> <a
+			href="child.html" th:href="@{/brand/child/}">儿童亲子</a>
+	</nav>
+</div>
+<!-- 品牌-儿童亲子-->
+<header th:fragment="header-brand-child">
+	<div class="innerHeader">
+		<a href="index.html" th:href="@{/}" class="logo"> <img
+			th:src="@{/images/logo.jpg}" />
+		</a>
+		<nav>
+			<a href="activity.html" th:href="@{/activity/}">活动</a> <a
+				href="brand.html" class="active" th:href="@{/brand/}">品牌</a> <a
+				href="vip.html" th:href="@{/vip/}">会员</a> <a href="aboutus.html"
+				th:href="@{/aboutus/}">关于我们</a>
+		</nav>
+		<div class="nav-btn sitecontent transform"></div>
+	</div>
+</header>
+<div th:fragment="brand-child-title"
+	class="nav-brand sitecontent transform">
+	<div class="bnav-hd clearfix">
+		<a class="active" href="child.html" th:href="@{/brand/child/}">儿童亲子</a>
+		<div class="bnav-btn pull-right"></div>
+	</div>
+</div>
+<div th:fragment="brand-child-nav" class="filmheader">
+	<nav>
+		<a href="brand.html" th:href="@{/brand/}">全部</a> <a href="food.html"
+			th:href="@{/brand/food/}">餐饮</a> <a href="retail.html"
+			th:href="@{/brand/retail/}">零售</a> <a href="activity_2.html"
+			th:href="@{/brand/fun/}">娱乐生活</a> <a href="child.html"
+			th:href="@{/brand/child/}" class="active">儿童亲子</a>
+	</nav>
+</div>
+
+
+

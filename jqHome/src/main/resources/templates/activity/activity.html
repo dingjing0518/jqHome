@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<link type="image/x-icon" rel="shortcut icon"
+	th:href="@{/images/logo.ico}" />
+<link rel="Bookmark" th:href="@{/images/logo.ico}" />
+<!--[if lt IE 9]>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,chrome=1">
+		<![endif]-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1">
+		-->
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- Bootstrap -->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/non-responsive.min.css}" />
+<link rel="stylesheet" th:href="@{/css/common.css}" />
+<link rel="stylesheet" th:href="@{/css/swiper.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/jq.css}" />
+<link rel="stylesheet" th:href="@{/css/wap.css}" />
+<link rel="stylesheet" media="screen and (max-width:700px)"
+	th:href="@{/css/moblie.css}" />
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/swiper.jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script
+	src="//cdn.bootcss.com/tinyscrollbar/2.4.2/jquery.tinyscrollbar.js"></script>
+<script th:src="@{/js/script.js}"></script>
+<title>金桥太茂官方网站</title>
+</head>
+
+<body>
+	<header th:replace="include/header::header-activity"></header>
+	<div class="contain mt110 sitecontent transform">
+		<div class="act_box hoverscale noscale clearfix">
+			<div class="act_lf">
+				<ul>
+					<li class="new activity">
+						<div class="swiper-container swiper-container1">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide" th:each="activity:${activitys}">
+									<img th:src="${activity.activityImg}" alt="" />
+								</div>
+							</div>
+							<a onclick="mySwiper1.slidePrev()" class="plation left"> <i
+								class="iconfont">&#xe603;</i>
+							</a> <a onclick="mySwiper1.slideNext()" class="plation right"> <i
+								class="iconfont">&#xe604;</i>
+							</a>
+						</div>
+					</li>
+					<li class="new activity">
+						<div class="titradwp">
+							<div class="titrad">精彩活动</div>
+						</div>
+						<div class="act_contentlist">
+							<div th:class="${meventDetail.isNewActivity==0?'ac_list':'ac_list new_activity'}" th:each="meventDetail:${meventDetails}"
+								th:data="${meventDetail.url}">
+								<div class="ac_img">
+									<img th:src="${meventDetail.coverImg}" />
+								</div>
+								<div class="ac_content">
+									<h3 th:utext="${meventDetail.title}">一切没实际行动的感恩都是在耍流氓！</h3>
+									<span
+										th:text="${#calendars.format(meventDetail.beginTime,'yyyy/MM/dd')}">09-06
+										/ 2016</span> <span>-</span> <span
+										th:text="${#calendars.format(meventDetail.endTime,'yyyy/MM/dd')}">09-06
+										/ 2016</span>
+									<p th:utext="${meventDetail.content}">免费大餐？这样的好事就在金桥太茂，活动期间，商场任意餐饮商户消费即可至
+										二楼服务台参与抽奖，不仅有商户优惠券抽取更能抽到免费大奖！</p>
+									<div class="ac_more">MORE ></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="scrollbar" id="scrollbar1">
+							<div class="scrollbar">
+								<div class="track">
+									<div class="thumb">
+										<div class="end"></div>
+									</div>
+								</div>
+							</div>
+							<div class="viewport">
+								<div class="overview">
+									<div th:class="${eventDetail.isNewActivity==0?'ac_list':'ac_list new_activity'}" th:each="eventDetail:${eventDetails} "
+										th:data="${eventDetail.url}">
+										<div class="ac_img">
+											<img src="img/tc_a.png" th:src="${eventDetail.coverImg}" />
+										</div>
+										<div class="ac_content">
+											<h3 th:utext="${eventDetail.title}">太茂君邀您免费吃大餐</h3>
+											<span
+												th:text="${#calendars.format(eventDetail.beginTime,'yyyy/MM/dd')}">09-06
+												/ 2016</span><span>-</span> <span
+												th:text="${#calendars.format(eventDetail.endTime,'yyyy/MM/dd')}">09-06
+												/ 2016</span>
+											<p th:utext="${eventDetail.content}">免费大餐？这样的好事就在金桥太茂，活动期间，商场任意餐饮商户消费即可至
+												二楼服务台参与抽奖，不仅有商户优惠券抽取更能抽到免费大奖！</p>
+										</div>
+										<div class="ac_titb">MORE ></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="act_rt">
+				<div>
+					<!--MOMENTS<br />OF ACTIVITIES <br /><span>精彩活动瞬间</span>-->
+					<img th:src="@{/images/act_lf.png}" />
+				</div>
+				<div class="swiper-container swiper-container2">
+					<a onclick="mySwiper2.slidePrev()" class="plation hotplation sw_lf">
+						<i class="iconfont">&#xe603;</i>
+					</a> <a onclick="mySwiper2.slideNext()"
+						class="plation  hotplation sw_rt"> <i class="iconfont">&#xe604;</i>
+					</a>
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"
+							th:each="activitySlide:${activitySlides}">
+							<a class="video-tit" th:text="${activitySlide.vedioName}">视频1标题显示</a>
+							<video class="" width="517" height="468" controls="controls"
+								th:src="${activitySlide.vedioUrl}"
+								th:poster="${activitySlide.coverImg}">
+							</video>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div style="clear: both;"></div>
+		<div th:replace="include/footer::footer-activity"></div>
+		<div id="share_pc"></div>
+	</div>
+	<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan style='display:none;' id='cnzz_stat_icon_1260372838'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D1260372838' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+</body>
+<script type="text/javascript" th:src="@{/js/activity/index.js}"></script>
+<script type="text/javascript" th:src="@{/js/activity/activity.js}"></script>
+</html>

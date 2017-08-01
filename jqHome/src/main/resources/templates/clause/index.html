@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>其它</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="viewport" content="width = device-width,user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/default.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/screen.css}" />
+<link th:href="@{/css/mobile.css}" rel="stylesheet"
+	media="screen and (max-width:700px)" />
+<link th:href="@{/images/logo.ico}"
+    type="image/x-icon" rel="shortcut icon"/>
+<link rel="Bookmark" th:href="@{/images/logo.ico}" />
+<script th:src="@{/js/jquery-1.8.3.min.js}"></script>
+<script th:src="@{/js/scrollbar.js}"></script>
+<script th:src="@{/js/base.js}"></script>
+<!--[if lt IE 9]>
+    <link href="css/ie8.css" rel="stylesheet">
+	<![endif]-->
+</head>
+<body>
+	<div th:replace="include/header::header-clause"></div>
+
+	<div class="wrap">
+		<div class="banner">
+			<img th:src="${clause.coverImg}" />
+		</div>
+	</div>
+	<div class="moudle-wrap mztk-wrap">   
+     	<a name="mztk">  	
+            <div class="moudle-hd">
+                <h2>免责条款</h2>
+                <div class="line"></div>
+                <h6>EXEMPTION CLAUSE</h6>
+            </div>
+        </a>
+        <div class="mztk-detail clearfix">
+            <div class="fl mztk-fl">
+                <img th:src="${clause.clauseImg}" width="100%"/>
+                <p class="p-txt"></p>
+            </div>
+            <div class="fr mztk-txt">
+            	<div class="sctxt">
+					<p th:utext="${clause.clauseContent}">1、	如会员卡因遗失而被他人冒用，由此造成的一切损失由微信会员本人自行承担。
+您的个人信息如有变更，请及时通知更新，以便我们提供更完善的服务。如因信息变更未及时通知所引起的一切后果，皆由微信会员本人自行承担。微信会员手机号及身份证号码不可更改。</p>
+				</div>
+                <div id="scrollbar1">
+                    <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+                    <div class="viewport">
+                         <div class="overview">
+                            <div class="txt-hd"></div>
+                            <p th:utext="${clause.clauseContent}">1、	如会员卡因遗失而被他人冒用，由此造成的一切损失由微信会员本人自行承担。
+您的个人信息如有变更，请及时通知更新，以便我们提供更完善的服务。如因信息变更未及时通知所引起的一切后果，皆由微信会员本人自行承担。微信会员手机号及身份证号码不可更改。</p>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a name="hzhb">
+            <div class="moudle-hd">
+                <h2>合作伙伴</h2>
+                <div class="line"></div>
+                <h6>COOPERATION PARTNERS</h6>
+            </div>        	
+        </a>
+        <div class="mztk-detail clearfix">
+        	
+        	<div class="fl hzhb">
+           		<dl>
+                	<dt><img th:src="${clause.partnerImg}" width="100%"/></dt>
+                    <dd>
+                    	<h3>CCH集团</h3>
+                        <p th:utext="${clause.partnerContent}">
+							
+                        </p>
+                    </dd>
+                </dl>
+            </div>
+            <div class="fl mztk-scroll">
+            	<img th:src="${clause.partnerImg2}" width="100%" />
+            </div>
+  
+        </div>
+        <a name="lxwm">
+            <div class="moudle-hd">
+                <h2>联系我们</h2>
+                <div class="line"></div>
+                <h6>CONTACT US</h6>
+            </div>
+        </a>
+        <div class="mztk-detail clearfix">
+        	<div class="contact-box">
+            	<img th:src="${clause.contactImg}" width="100%" />
+                <div class="contact-way">
+                    <span>
+                    	<i class="icon icon-tel" ></i><span th:text="${clause.phone}"></span>
+                    </span>
+                    <span>
+                    	<i class="icon icon-map" ></i><span th:text="${clause.address}"></span>
+                    </span>
+                    <span class="noborder">
+                    	<i class="icon icon-email" ></i><span th:text="${clause.email}"></span>
+                    </span>
+                </div>
+            </div>            
+        </div>
+     </div>
+
+	<div th:replace="include/footer::footer-content"></div>
+
+	<div class="getTop"></div>
+	<script>
+        $('#scrollbar1,#scrollbar2,#scrollbar3').tinyscrollbar({
+             size: 350,
+             sizethumb: 85,	
+        });
+    </script>
+</body>
+</html>

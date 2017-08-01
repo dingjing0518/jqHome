@@ -1,0 +1,40 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>首页</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+    			<div class="mainbgimg">
+    			</div>
+    			
+<!--         <div class="set-wrap index-wrap container"> -->
+<!--             <div class="row"> -->
+<!--                 <div class="col-md-3" th:each="menu:${session.menus}"> -->
+<!--                    <dl> -->
+<!--                        <dt><img src="" /></dt> -->
+<!--                        <dd th:each="m : ${menu.value}" th:text="${m.name}"></dd> -->
+<!--                    </dl> -->
+<!--                 </div> -->
+<!--             </div>  -->
+<!--         </div> -->
+    </div>
+</div>
+</body>
+</html>

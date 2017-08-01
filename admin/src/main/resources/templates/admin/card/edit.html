@@ -1,0 +1,98 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>会员卡修改</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.theme.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/confirm.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/fileUpload.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/count.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script type="text/javascript" th:src="@{/js/card/edit.js}"></script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+    <div class="mainpanel">
+        <div class="add－cart-wrap">
+			<div class="add-carquan-wrap">
+				<div class="hd clearfix">
+					<div class="bar state-bar pull-left">使用情况</div>
+				</div>
+				<div class="form-group padd30">
+					<label class="col-md-4 control-label text-right" style="padding-top:8px">状态：</label>
+					<div class="col-md-2 pl50 pt3 text-primary" th:text="${card.valid.toString()=='INVALID'}?无效:有效" id="state-text">
+						未生效
+					</div>
+					<form th:action="@{/admin/cards/__${card.id}__/valid}" id="validForm" th:method="put" >
+						<input id="valid-button" type="submit" class="btn confirm" data-toggle="modal" th:classappend="${card.valid.toString()=='VALID'}?'btn btn-open':'btn  btn-close'"
+								data-target=".modal" th:value="${card.valid.toString()=='VALID'}?关闭:开启" />
+					</form>
+				</div>
+            </div>
+            <div class="hd">
+                <div class="bar edit-bar">设置会员卡</div>
+            </div>
+            <div th:if="${message!=null}" th:class="${message.status}" th:text="${message.message}"></div>
+            <div class="row">
+                <form class="form-horizontal" th:object="${card}" th:method="put" id="form" th:attr="data-id=${card.id}">
+                    <div class="form-group pt50">
+                        <label class="col-md-3 control-label required">名称：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{name}" placeholder="4-20个字"/>
+                            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect date</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">背景图：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{imgHref}}" width="300" height="210"/>
+                            <input type="file" id="imageUp"/>
+                            <input type="hidden" th:field="*{imgHref}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-3 control-label"></label>
+                    	<label class="col-md-4 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：640像素 * 245像素</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label required" >初始积分：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{initScore}" placeholder="请输入整数"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">描述：</label>
+                        <div class="col-md-3">
+                            <textarea class="form-control" rows="8" th:field="*{summary}" placeholder="小于500个字"></textarea>
+                        </div>
+                    </div>
+                    <div class="group-ft col-xs-offset-3 mt50">
+                        <a th:href="@{/admin/cards}" class="btn btn-default">取消</a>
+                        <input type="submit" class="btn btn-success col-xs-offset-2" th:if="${card.valid.toString()=='INVALID'}" value="确定"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dialog-confirm"  title=""  th:attr="title=${card.valid.toString()=='VALID'}?'关闭的会员卡下无法添加会员,是否确认':'是否确认开启该会员卡'">
+    <p th:text="${card.name}"></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>会员卡积分</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.theme.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/validate.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/datepicker-zh-CN.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/fileUpload.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script type="text/javascript" th:src="@{/js/shopRule/create.js}"></script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="member-jfe-wrap container">
+            <div class="hd">
+                <div class="bar using-bar">添加店铺积分规则</div>
+            </div>
+            <div class="show-msg">
+                <form class="form-horizontal pt50" id="form" th:object="${rule}" th:method="post">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">名称：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{name}" placeholder="4-20个字符"/>
+                        </div>
+                        <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect date</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">生效日期：</label>
+                        <div class="col-md-3">
+                            <input class="form-control datepicker" placeholder="生效日期应早于失效日期" type="text" th:field="*{beginTime}"/>
+                        	<span class="red">*不填代表长期有效</span>
+                        </div>
+                        <p class="error" th:if="${#fields.hasErrors('beginTime')}" th:errors="*{beginTime}">Incorrect
+                            date</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">失效日期：</label>
+                        <div class="col-md-3">
+                            <input class="form-control datepicker" placeholder="失效日期应晚于生效日期" type="text" th:field="*{endTime}"/>
+                        	<span class="red">*不填代表长期有效</span>
+                        </div>
+                        <p class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}">Incorrect
+                            date</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">额外积分：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{score}" placeholder="输入整数"/>
+                        </div>
+                        <p class="error" th:if="${#fields.hasErrors('score')}" th:errors="*{score}">Incorrect date</p>
+                    </div>
+                    <div class="form-group" id="rate-div">
+                        <label class="col-md-4 control-label">交易倍率：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{rate}" placeholder="小数点后一位"/>
+                        </div>
+                        <p class="error" th:if="${#fields.hasErrors('rate')}" th:errors="*{rate}">Incorrect date</p>
+                    </div>
+                    <div class="form-group break-word">
+                        <label class="col-md-4 control-label required" style="margin-right: 40px;">活动店铺：</label>
+                        <div class="col-md-1 w12">
+                            <div class="checkbox" th:each="s:${shops}">
+                                <label>
+                                    <input type="checkbox" th:field="*{shops}" th:value="${s.id}"/>
+                                    <span th:text="${s.name}"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-ft col-xs-offset-4 mt50">
+                        <a th:href="@{/admin/shopRules}" class="btn btn-default ml-40">返回</a>
+                        <input type="submit" class="btn btn-success ml-40" value="确认"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

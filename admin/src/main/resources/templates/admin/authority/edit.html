@@ -1,0 +1,80 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>权限详情</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.theme.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/confirm.js}"></script>
+    <script type="text/javascript" th:src="@{/js/authority/edit.js}"></script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="power-datil-wrap container">
+            <div class="hd clearfix">
+                <div class="bar state-bar short-bar pull-left">权限状态</div>
+                <form th:action="@{/admin/authorities/__${authority.id}__/valid}" id="validForm" th:method="put">
+	                <input type="submit" id="validSubmit"  th:class="${authority.valid.toString()=='VALID'}? 'btn btn-open' : 'btn btn-close' "  th:value="${authority.valid.toString()=='VALID'}?关闭:开启"/>
+                </form>
+            </div>
+            <div class="form-group padd30">
+                <label class="col-md-4 control-label text-right" style="padding-top:8px">状态：</label>
+                <div class="col-md-3 pl50 pt3 text-success" th:text="${authority.valid.toString()=='VALID'}?使用中:无效">
+                    使用中
+                </div>
+            </div>
+            <div class="hd">
+                <div class="bar edit-bar">权限设置</div>
+            </div>
+            <div th:if="${message!=null}" th:class="${message.status}" th:text="${message.message}"></div>
+            <div class="show-msg">
+                <form class="form-horizontal pt50" id="form" th:attr="data-id=${authority.id}" th:object="${authority}" th:method="put">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">名称：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{name}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">权限配置：</label>
+                        <div class="col-md-3">
+                            <div class="checkbox" th:each="m:${authMenus}">
+                                <label>
+                                    <input type="checkbox" value="" th:field="*{menus}" th:value="${m.id}"/>
+                                    <span th:text="${m.name}"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-ft col-xs-offset-4 mt50">
+                        <a th:href="@{/admin/authorities}" class="btn btn-default ml40">返回</a>
+                        <input type="submit" class="btn btn-success ml-40" value="确认"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dialog-confirm" title=""  th:attr="title=${authority.valid.toString()=='VALID'}?'是否确认关闭该权限':'是否确认开启该权限'">
+  <p th:text="${authority.name}"></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+include "repository","model","jqHome","admin"
+rootProject.children.each {
+	it.buildFileName = it.name + '.gradle'
+}

@@ -1,0 +1,17 @@
+ext.projectIds = ['group': 'com.by', 'version': '0.1']
+
+allprojects{
+	group = projectIds.group
+	version = projectIds.version
+	apply plugin: 'eclipse'
+	apply plugin: 'idea'
+}
+
+subprojects{
+	apply plugin :'java'
+	repositories {
+		maven{
+			url "http://maven.aliyun.com/nexus/content/groups/public"
+		}
+	}
+}

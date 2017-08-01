@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>添加业态</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/fileUpload.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script type="text/javascript" th:src="@{/js/category/create.js}"></script>
+</head>
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+    <div class="mainpanel">
+        <div class="add-giftquan-wrap">
+            <div class="hd">
+                <div class="bar add-bar">添加业态</div>
+            </div>
+            <div th:if="${message!=null}" th:class="${message.status}" th:text="${message.message}"></div>
+            <div class="row">
+                <form id="form" class="form-horizontal pt50" th:object="${category}" th:method="post">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">名称：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{name}"/>
+                            <i class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">必填</i>
+                        </div>
+                    </div>
+                    <div class="group-ft col-xs-offset-4 mt50">
+                        <a th:href="@{/admin/shopCategories}" class="btn btn-default">返回</a>
+                        <input type="submit" class="btn btn-success ml-40" value="确认"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

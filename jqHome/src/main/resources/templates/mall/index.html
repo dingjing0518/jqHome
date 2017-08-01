@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>太茂</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="viewport" content="width = device-width,user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/default.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/screen.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/video-js.css}" />
+<link th:href="@{/css/mobile.css}" rel="stylesheet"
+	media="screen and (max-width:700px)" />
+<link th:href="@{/images/logo.ico}" type="image/x-icon"
+	rel="shortcut icon" />
+<link rel="Bookmark" th:href="@{/images/logo.ico}" />
+<script th:src="@{/js/jquery-1.8.3.min.js}"></script>
+<script th:src="@{/js/video.js}"></script>
+<script th:src="@{/js/base.js}"></script>
+<script th:src="@{/js/mall/index.js}"></script>
+<script th:src="@{/js/scrollbar.js}"></script>
+<!--[if lt IE 9]>
+    <link href="css/ie8.css" rel="stylesheet">
+	<![endif]-->
+</head>
+<body class="mall">
+	<div th:replace="include/header::header-mall"></div>
+
+	<div id="eut-feature-title" class="eut-feature-content eut-align-center-center eut-style-2 eut-fade-in">    
+    <div class="eut-container">
+            <h1 class="eut-title eut-light"><span>The Mall Jinqiao</span></h1>
+            <div class="eut-description eut-light">record time of 30 months</div>
+    </div>
+</div>
+<div class="eut-bg-wrapper">
+	<div class="eut-pattern eut-primary-1-overlay eut-overlay-30"></div>		<div class="eut-bg-video">
+		<video loop="loop" muted="muted" autoplay="autoplay" poster="" preload="auto">
+            <source src="http://joymap.b0.upaiyun.com/CCH.mp4" type="video/mp4" />
+        </video>
+	</div>
+</div>
+
+	<div class="moudle-wrap shop-wrap">
+		<div class="moudle-hd">
+			<h2>金桥太茂</h2>
+			<div class="line"></div>
+			<h6>PROJECT INTRODUCTION</h6>
+		</div>
+		<div class="shop-detail clearfix">
+			<div class="scdw-pic fl">
+				 <video id="example_video_1" class="video-js vjs-default-skin" controls="controls" preload="none" width="100%" height="350" data-setup="{}">
+                    <source src="http://joymap.b0.upaiyun.com/mall.mp4" type='video/mp4' />
+                </video>
+			</div>
+			<div class="scdw-msg fl">
+				<div class="msg-top">
+					<div class="sctxt txt3">
+                    	<h2 th:utext="${mall.section1Title}">上海金桥太茂—浦东金桥中心区域新地标购物中心</h2>
+                        <p th:utext="${mall.section1Content}">上海金桥太茂商业广场，位于上海浦东新区金桥的正中心，紧邻主干道杨高路，汇聚周边常住居民及金桥开发区精英人才。商业体量达
+                        7.7万平米，含括电影、高端生鲜食品超市、餐饮美食、亲子教育、快时尚及娱乐休闲等丰富业态组合，满足消费者对高品质生活的需求。</p>
+					</div>
+					<div id="scrollbar3" class="scroll scroll3">
+						<div class="scrollbar">
+							<div class="track">
+								<div class="thumb">
+									<div class="end"></div>
+								</div>
+							</div>
+						</div>
+						<div class="viewport">
+							<div class="overview">                            	
+                        		<h2 th:utext="${mall.section1Title}">上海金桥太茂—浦东金桥中心区域新地标购物中心</h2>
+                            	<p th:utext="${mall.section1Content}">上海金桥太茂商业广场，位于上海浦东新区金桥的正中心，紧邻主干道杨高路，汇聚周边常住居民及金桥开发区精英人才。商业体量
+                                达7.7万平米，含括电影、高端生鲜食品超市、餐饮美食、亲子教育、快时尚及娱乐休闲等丰富业态组合，满足消费者对高品质生活的需求。</p>
+							</div>
+						</div>
+					</div>
+					<div class="msg-pic">
+						<img th:src="${mall.section1Img1}" />
+						<img th:src="${mall.section1Img2}" />
+                        <img th:src="${mall.section1Img3}" />
+					</div>
+				</div>
+			</div>
+		</div>
+        <div class="shop-detail clearfix mt60">
+            <div class="fl xmtd-pic">
+                <img th:src="${mall.section2Img}" width="100%" />
+            </div>
+            <div class="fr w100 xmtd-txt">
+            	<div class="sctxt txt2">
+                	<div class="txt-hd" th:utext="${mall.section2Title}">金桥正中心，连接外高桥与陆家嘴</div>
+                    <p th:utext="${mall.section2Content}"></p>
+                </div>
+                <div id="scrollbar1">
+                    <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>                    
+                    <div class="txt-hd" th:utext="${mall.section2Title}">金桥正中心，连接外高桥与陆家嘴</div>
+                    <div class="viewport">
+                         <div class="overview" th:utext="${mall.section2Content}">
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="shop-detail mall-show">
+        	<ul class="clearfix">
+            	<li>
+                	<img th:src="${mall.section3Img1}" />
+                    <div class="mall-name" th:utext="${mall.section3Title1}">金桥外高桥区域内唯一的IMAX影院</div>
+                    <div class="mall-msg" th:utext="${mall.section3Content1}">
+                    	<p>
+                        	作为沪上首家获得五星级别的国际化影城，上影影城一直都是上海国际电影节的主会场，广受影迷的关注与喜爱。上影影院将入驻金桥太茂
+                            的4F， 面积4000平米，设有7个放映厅，可容纳1200人同时观影，IMAX电影、4D、3D应有尽有。热爱看电影的消费者不用出远门，即能享受极致观影体验。
+                        </p>
+						<div style="text-align: center">
+						<img th:src="@{/images/arrow.png}" />
+						</div>
+                    </div>
+                </li>
+                <li>
+                	<img th:src="${mall.section3Img2}" />
+                    <div class="mall-name" th:utext="${mall.section3Title2}">G-super进口生鲜直采中心</div>
+                    <div class="mall-msg" th:utext="${mall.section3Content2}">
+                    	<p>
+                        	绿地集团旗下全球商品直销中心 - G-Super强势入驻金桥太茂，为金桥太茂周边居民及精英白领们带来汇集欧美、澳新、
+                            东南亚等超过8000多种优质进口商品。让金桥的消费者可以足不出“沪”，在家门口即能享受零距离、零时差、零风险、一站式的“海淘”乐趣。
+                        </p>
+						<div style="text-align: center">
+							<img th:src="@{/images/arrow.png}" />
+						</div>
+                    </div>
+                </li>
+                <li>
+                	<img th:src="${mall.section3Img3}" />
+                    <div class="mall-name" th:utext="${mall.section3Title3}">高品质精彩生活 尽在金桥太茂</div>
+                    <div class="mall-msg" th:utext="${mall.section3Content3}">
+                    	<p>
+                        	有来自国内外不同菜系美食的餐饮业态;有适合0-12岁不同年龄段的儿童业态;有年轻人喜欢的卡拉OK，更有国际化的快时尚、零售、休闲
+                            等丰富业态组合。同时，这里的智能停车功能便捷迅速，人性化的智能服务随处可见，舒适快捷生活一触即发，一个会思考的商业广场正在金桥崛起。”
+                        </p>
+						<div style="text-align: center">
+							<img th:src="@{/images/arrow.png}" />
+						</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="shop-detail mt60">
+        	<img th:src="${mall.section4Img}" />
+            <div class="mall-name" th:utext="${mall.section4Title}">美好未来，需用心打造才能携手共赢</div>
+            <div class="mall-msg" th:utext="${mall.section4Content}">
+            	<p>金桥太茂由上海陆景置业有限公司投资建设，陆景置业的董事长、投资方CCH的首席执行官吴少聪先生表示：“金桥太茂不只
+                是一个购物商场，这里更是人与人，心连心一起享受生活的好地方。”“对金桥太茂来说，创造优质美好生活，增强家人、朋友、同事的情感纽带
+                正是我们要共同努力实现的目标。不论你是在金桥安居的小家庭，或是在金桥开发区努力拼搏的精英，还是每天往返于杨高路的一族，这里欢迎你。</p>
+            </div>
+        </div>
+		<div class="moudle-hd">
+			<h2>联系我们</h2>
+			<div class="line"></div>
+			<h6>CONTACT US</h6>
+		</div>
+        <div class="shop-detail">
+            <div id="allmap"></div>
+            <div class="contact-way">
+                <span>
+                    <i class="icon icon-tel"></i><span th:utext="${clause.phone}">400-820-6503</span>
+                </span>
+                <span>
+                    <i class="icon icon-map"></i><span th:utext="${clause.address}">上海市浦东新区金高路1882号</span>
+                </span>
+                <span class="noborder">
+                    <i class="icon icon-email"></i><span th:utext="${clause.email}">jinqiao@163.com</span>
+                </span>
+            </div>
+		</div>
+	</div>
+
+	<div th:replace="include/footer::footer-content"></div>
+
+	<div class="getTop"></div>
+	<script type="text/javascript" th:src="${mall.mapUrl}"></script>
+	<script>
+		var mgs_txt1 = $(".mall-msg").eq(0).text()
+		var mgs_txt2 = $(".mall-msg").eq(1).text()
+		var mgs_txt3 = $(".mall-msg").eq(2).text()
+		$(".mall-msg").each(
+				function(i) {
+					var divH = $(this).height();
+					var $p = $("p", $(this)).eq(0);
+					while ($p.outerHeight() > divH) {
+						$p.text($p.text().replace(
+								/(\s)*([a-zA-Z0-9]+|\W)(\.\.\.\.\.\.)?$/,
+								"......"));
+					}
+					;
+					$('.mall-msg:eq(0)').click(function() {
+						$('.mall-show').css('margin-bottom', '120px')
+						$(this).find('p').text(mgs_txt1);
+						$(this).find('img').remove();
+					})
+					$('.mall-msg:eq(1)').click(function() {
+						$('.mall-show').css('margin-bottom', '120px')
+						$(this).find('p').text(mgs_txt2);
+						$(this).find('img').remove();
+					})
+					$('.mall-msg:eq(2)').click(function() {
+						$('.mall-show').css('margin-bottom', '120px')
+						$(this).find('p').text(mgs_txt3);
+						$(this).find('img').remove();
+					})
+				});
+		$('#scrollbar1').tinyscrollbar({
+			size : 180,
+			sizethumb : 55,
+		});
+		
+		$('.mall-msg p:lt(3)').append('<div style="text-align: center"><img th:src="@{/images/arrow.png}" /></div>');
+
+		var map = new BMap.Map("allmap");
+		var point = new BMap.Point(121.614918, 31.272318);
+		var marker = new BMap.Marker(point); // 创建标注
+		map.addOverlay(marker); // 将标注添加到地图中
+		marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+		map.centerAndZoom(point, 15);
+		var opts = {
+			width : 200, // 信息窗口宽度
+			height : 50, // 信息窗口高度址喔~"
+		}
+		var infoWindow = new BMap.InfoWindow("地址：上海市浦东新区金桥镇<br/>金桥太茂商业广场", opts); // 创建信息窗口对象 
+		marker.addEventListener("click", function() {
+			map.openInfoWindow(infoWindow, point); //开启信息窗口
+		});
+	</script>
+</body>
+</html>

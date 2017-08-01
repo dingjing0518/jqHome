@@ -1,0 +1,94 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>会员管理</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.theme.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/validate.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jsRender.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/page.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/datepicker-zh-CN.js}"></script>
+    <script type="text/javascript" th:src="@{/js/member/list.js}"></script>
+    <script id="detail" type="text/x-jsrender">
+		{{for content}}
+		<tr>
+			<td><a href="/jqCrm/admin/members/{{>id}}">{{>mobile}}</a></td>
+			<td>{{>cardName}}</td>
+			<td>{{>createdTime}}</td>
+			<td>{{>score}}</td>
+		</tr>
+		{{/for}}
+    </script>
+</head>
+
+<body>
+<div class=" header clearfix ">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="mem-manage">
+            <div class="hd">
+                <div class="bar base-bar">会员管理</div>
+            </div>
+            <form class="form-inline" th:object="${form}" id="queryForm">
+                <div class="form-group">
+                    <label>会员卡类型</label>
+                    <select class="form-control w120" th:field="*{card}">
+                        <option value="">全部</option>
+                        <option th:each="c : ${cards}" th:value="${c.id}" th:text="${c.name}">name</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>注册日期</label>
+						<input class="form-control datepicker" th:field="*{beginTime}" type="text"/>
+                    	-
+                    	<input class="form-control datepicker" th:field="*{endTime}" type="text"/>
+                </div>
+                <div class="form-group">
+                    <label>手机</label>
+                    <input class="form-control w200" type="text" th:field="*{mobile}"/>
+                </div>
+                <button class="btn btn-primary btn-xs" type="submit">查找</button>
+            </form>
+
+            <table class="table table-striped bg-white">
+                <thead>
+                <tr>
+                    <th>手机号</th>
+                    <th>会员卡</th>
+                    <th>注册日期</th>
+                    <th>可用积分</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="m:${lists.content}">
+                    <td><a th:text="${m.mobile}" th:href="@{'/admin/members/'+${m.id}}">Jessica Foster</a></td>
+                    <td th:text="${m.cardName}">普通</td>
+                    <td th:text="${m.createdTime}">2015年10月10号</td>
+                    <td th:text="${m.score}">1234</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="pagination-wrap">
+                <div th:replace="admin/layout/page::page"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

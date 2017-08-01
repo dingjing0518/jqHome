@@ -1,0 +1,118 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>店铺积分</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.theme.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/validate.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/datepicker-zh-CN.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/fileUpload.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/confirm.js}"></script>
+    <script type="text/javascript" th:src="@{/js/shopRule/edit.js}"></script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="member-jfe-wrap container">
+            <div class="hd clearfix">
+                <div class="bar state-bar pull-left">使用情况</div>
+            </div>
+            <div class="form-group padd30 pl70">
+                <label class="col-md-4 control-label text-right" style="padding-top:8px">状态：</label>
+                <div class="col-md-2 pl50 pt3 text-primary" th:text="${statusMessage.state}" id="state-text">
+                    未生效
+                </div>
+                <form th:method="put" th:action="@{/admin/shopRules/__${rule.id}__/valid}" id="validForm">
+                    <input id="valid-button" type="submit" class="btn confirm" data-toggle="modal"
+                           th:classappend="${rule.valid.toString()=='VALID'}?'btn btn-open':'btn btn-close'"
+                           data-target=".modal"
+                           th:if="${statusMessage.canValid}" th:value="${rule.valid.toString()=='VALID'}?关闭:开启"/>
+                </form>
+            </div>
+            <div class="hd">
+                <div class="bar" th:attrappend="class=${' '+statusMessage.status}">店铺积分规则</div>
+            </div>
+            <div th:class="${message.status}" th:text="${message.message}" th:if="${message!=null}"></div>
+            <div class="show-msg pl70">
+                <form class="form-horizontal pt50" id="form" th:attr="data-id=${rule.id}" th:object="${rule}"
+                      th:method="put">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">名称：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{name}"  placeholder="4-20个字符"/>
+                        </div>
+                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect date</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">生效日期：</label>
+                        <div class="col-md-3">
+                            <input class="form-control datepicker" placeholder="生效日期应早于失效日期" type="text" th:field="*{beginTime}"/>
+                        	<span class="red">*不填代表长期有效</span>
+                        </div>
+                        <p th:if="${#fields.hasErrors('beginTime')}" th:errors="*{beginTime}">Incorrect date</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">失效日期：</label>
+                        <div class="col-md-3">
+                            <input class="form-control datepicker" placeholder="失效日期应晚于生效日期" type="text" th:field="*{endTime}"/>
+                        	<span class="red">*不填代表长期有效</span>
+                        </div>
+                        <p th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}">Incorrect date</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">额外积分：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{score}"/>
+                        </div>
+                        <p th:if="${#fields.hasErrors('score')}" th:errors="*{score}">Incorrect date</p>
+                    </div>
+                    <div class="form-group" id="rate-div">
+                        <label class="col-md-4 control-label">交易倍率：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{rate}"/>
+                        </div>
+                        <p th:if="${#fields.hasErrors('rate')}" th:errors="*{rate}">Incorrect date</p>
+                    </div>
+                    <div class="form-group break-word">
+                        <label class="col-md-4 control-label required" style="margin-right: 40px;">活动店铺：</label>
+                        <div class="col-md-1 w12">
+                            <div class="checkbox" th:each="s:${shops}">
+                                <label>
+                                    <input type="checkbox" th:field="*{shops}" th:value="${s.id}"/>
+                                    <span th:text="${s.name}"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-ft col-xs-offset-4 mt50">
+                        <a th:href="@{/admin/shopRules}" class="btn btn-default ml40">返回</a>
+                        <input type="submit" class="btn btn-success col-xs-offset-1" th:value="提交" th:if="${statusMessage.canUpdate}"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dialog-confirm" title="" th:attr="title=${rule.valid.toString()==valid}?'是否确认关闭该店铺积分规则':'是否确认开启该店铺积分规则'">
+    <p th:text="${rule.name}"></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+buildscript {
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
+    }
+	repositories {
+		maven { url "http://repo.spring.io/libs-release" }
+        mavenLocal()
+        mavenCentral()
+	}
+}
+    
+apply plugin: 'spring-boot'
+dependencies {
+   	compile("org.springframework.boot:spring-boot-starter")
+   	compile("org.hibernate:hibernate-validator")
+   	compile("org.hibernate:hibernate-envers:5.0.4.Final")
+}

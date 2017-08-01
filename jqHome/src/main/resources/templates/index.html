@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<link type="image/x-icon" rel="shortcut icon"
+	th:href="@{/images/logo.ico}" />
+<link rel="Bookmark" th:href="@{/images/logo.ico}" />
+<!--[if lt IE 9]>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,chrome=1">
+		<![endif]-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1">
+		-->
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- Bootstrap -->
+<link rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" href="css/non-responsive.min.css"
+	th:href="@{/css/non-responsive.min.css}" />
+<link rel="stylesheet" href="css/common.css"
+	th:href="@{/css/common.css}" />
+<link rel="stylesheet" href="css/swiper.min.css"
+	th:href="@{/css/swiper.min.css}" />
+<link rel="stylesheet" type="text/css" href="css/jq.css"
+	th:href="@{/css/jq.css}" />
+<link rel="stylesheet" href="css/wap.css" th:href="@{/css/wap.css}" />
+<link rel="stylesheet" media="screen and (max-width:700px)"
+	href="css/moblie.css" th:href="@{/css/moblie.css}" />
+<script type="text/javascript" src="js/jquery.min.js"
+	th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="js/swiper.jquery.min.js"
+	th:src="@{/js/swiper.jquery.min.js}"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"
+	th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="js/script.js"
+	th:src="@{/js/script.js}"></script>
+<title>金桥太茂官方网站</title>
+</head>
+<body>
+
+	<header th:replace="include/header::header-index"></header>
+
+	<div
+		class="swiper-container bannerSwiper index-banner sitecontent transform pt80">
+		<div class="swiper-wrapper">
+			<div class="banner swiper-slide" th:each="slide,iterStat:${slides}"
+				th:src="${slide.coverImg}" th:data="${slide.mobileImg}"></div>
+		</div>
+		<a onclick="mySwiper.slidePrev()" class="plation left"> <i
+			class="iconfont">&#xe603;</i>
+		</a> <a onclick="mySwiper.slideNext()" class="plation right"> <i
+			class="iconfont">&#xe604;</i>
+		</a>
+		<div class="pagination"></div>
+	</div>
+
+	<div th:replace="include/footer::footer-index"></div>
+	<div id="share_pc"></div>
+	<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan style='display:none;' id='cnzz_stat_icon_1260332904'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D1260332904' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+</body>
+<link rel="stylesheet" href="css/share.css" th:href="@{/css/share.css}" />
+<script src="js/slide.js" th:src="@{/js/slide.js}"></script>
+<script type="text/javascript">
+	var mySwiper;
+</script>
+</html>

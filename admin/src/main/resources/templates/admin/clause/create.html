@@ -1,0 +1,155 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>会员介绍</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.theme.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/validate.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/datepicker-zh-CN.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/ckeditor/ckeditor.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/ckeditor/adapters/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/fileUpload.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script type="text/javascript" th:src="@{/js/clause/create.js}"></script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="member-jfe-wrap container">
+            <div th:class="${message.status}" th:text="${message.message}" th:if="${message!=null}"></div>
+            <div class="show-msg pl70">
+                <form class="form-horizontal pt50" id="form" th:attr="data-id=${clause.id}" th:object="${clause}"
+                      th:method="post">    
+
+                    <div class="form-group imgUp">
+                        <label class="col-md-4 control-label required">顶部图：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{coverImg}}" alt="点击上传"/>
+                            <input type="file" id="imgUp1"/>
+                            <input type="hidden" th:field="*{coverImg}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-5 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：1100像素 * 379像素</label>
+                    </div>
+                    
+                    <div class="form-group imgUp">
+                        <label class="col-md-4 control-label required">免责条款图片：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{clauseImg}}" alt="点击上传"/>
+                            <input type="file" id="imgUp2"/>
+                            <input type="hidden" th:field="*{clauseImg}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-5 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：488像素 * 300像素</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">免责条款描述：</label>
+                        <div class="col-md-5">
+                            <textarea class="form-control" rows="6" th:field="*{clauseContent}"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group imgUp">
+                        <label class="col-md-4 control-label required">合作伙伴图片：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{partnerImg}}" alt="点击上传"/>
+                            <input type="file" id="imgUp3"/>
+                            <input type="hidden" th:field="*{partnerImg}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-5 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：600像素 * 300像素</label>
+                    </div>
+                    
+                    <div class="form-group imgUp">
+                        <label class="col-md-4 control-label required">合作伙伴图片2：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{partnerImg2}}" alt="点击上传"/>
+                            <input type="file" id="imgUp5"/>
+                            <input type="hidden" th:field="*{partnerImg2}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-5 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：610像素 * 433像素</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">合作伙伴描述：</label>
+                        <div class="col-md-5">
+                            <textarea class="form-control" rows="6" th:field="*{partnerContent}"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group imgUp">
+                        <label class="col-md-4 control-label required">联系我们图片：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{contactImg}}" alt="点击上传"/>
+                            <input type="file" id="imgUp4"/>
+                            <input type="hidden" th:field="*{contactImg}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-5 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：610像素 * 400像素</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">电话：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{phone}"/>
+                            <i class="error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">地址：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{address}"/>
+                            <i class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">邮箱：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{email}"/>
+                            <i class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="group-ft col-xs-offset-4 mt50">
+                        <a th:href="@{/admin/memberintro}" class="btn btn-default ml50">返回</a>
+                        <input type="submit" class="btn btn-success ml-40" value="确认"/>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

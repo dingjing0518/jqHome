@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<link type="image/x-icon" rel="shortcut icon"
+	th:href="@{/images/logo.ico}" />
+<link rel="Bookmark" th:href="@{/images/logo.ico}" />
+<!--[if lt IE 9]>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,chrome=1">
+		<![endif]-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1">
+		-->
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- Bootstrap -->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/non-responsive.min.css}" />
+<link rel="stylesheet" th:href="@{/css/common.css}" />
+<link rel="stylesheet" th:href="@{/css/swiper.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/jq.css}" />
+<link rel="stylesheet" th:href="@{/css/wap.css}" />
+<link rel="stylesheet" media="screen and (max-width:700px)"
+	th:href="@{/css/moblie.css}" />
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/swiper.jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+<title>金桥太茂官方网站-会员</title>
+</head>
+<body class="">
+	<header th:replace="include/header::header-vip"></header>
+	<div class="banner vip mt110 sitecontent transform"
+		th:attr="style='background:url('+${vip.coverImg}+') no-repeat;background-size:cover'"></div>
+	<div class="contain vip-con sitecontent transform"
+		style="position: relative; min-width: 1440px;">
+		<div class="wechat clearfix">
+			<img class="iphone" th:src="${vip.useImg}" alt="" />
+			<div class="vip_news">
+				<img th:src="${vip.memberRightsImg}" alt="" />
+
+			</div>
+		</div>
+		<div class="newsdetail">
+			<img class="silder-bg" th:src="@{/images/newsbk.jpg}" alt="" />
+			<div class="news-container swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<h2 th:text="${notify.title}"></h2>
+						<!-- 
+						<br/>
+						<p th:text="${notify.content}"></p>
+						 -->
+					</div>
+					<!--
+						<div class="swiper-slide">
+							<h2>活动通知</h2>
+							<br />
+							<p>活动通知活动通知活动通知活动通知活动通知！</p>
+						</div>-->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="include/footer::footer-vip"></div>
+	<div id="share_pc"></div>
+	<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan style='display:none;' id='cnzz_stat_icon_1260372875'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D1260372875' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+</body>
+<script type="text/javascript" th:src="@{/js/notify/swiper.js}"></script>
+<script type="text/javascript">
+	var mySwiper;
+	</script>
+</html>

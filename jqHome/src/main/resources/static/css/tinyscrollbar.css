@@ -1,0 +1,10 @@
+/* Tiny Scrollbar */
+#scrollbar1,#scrollbar2,#scrollbar3 { width: 520px; margin: 20px 0 10px; }
+#scrollbar1 .viewport,#scrollbar2 .viewport,#scrollbar3 .viewport{ width: 500px; height: 200px; overflow: hidden; position: relative; }
+#scrollbar1 .overview,#scrollbar2 .overview,#scrollbar3 .overview{ list-style: none; position: absolute; left: 0; top: 0; padding: 0; margin: 0; }
+#scrollbar1 .scrollbar,#scrollbar2 .scrollbar,#scrollbar3 .scrollbar{ background:#096; position: relative; background-position: 0 0; float: right; width: 4px; }
+#scrollbar1 .track,#scrollbar2 .track,#scrollbar3 .track{ background:#e0e0e0; height: 100%; width:4px; position: relative; padding: 0 1px; }
+#scrollbar1 .thumb,#scrollbar2 .thumb,#scrollbar3 .thumb{ background:#e4848f; height: 20px; width: 6px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left:0; }
+#scrollbar1 .thumb .end,#scrollbar2 .thumb .end,#scrollbar3 .thumb .end { background:#e0e0e0;  overflow: hidden; height: 30px; width: 25px; }
+#scrollbar1 .disable,#scrollbar2 .disable,#scrollbar3 .disable { display: none; }
+.noSelect { user-select: none; -o-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; }

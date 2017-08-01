@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>品牌</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="viewport" content="width = device-width,user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/default.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/screen.css}" />
+<link th:href="@{/css/mobile.css}" rel="stylesheet"
+	media="screen and (max-width:700px)" />
+<link th:href="@{/images/logo.ico}"
+    type="image/x-icon" rel="shortcut icon"/>
+<link rel="Bookmark" th:href="@{/images/logo.ico}" />
+<script th:src="@{/js/jquery-1.8.3.min.js}"></script>
+<script th:src="@{/js/masonry.pkgd.min.js}"></script>
+<script th:src="@{/js/scrollbar.js}"></script>
+<script th:src="@{/js/base.js}"></script>
+<script th:src="@{/js/shop/index.js}"></script>
+<script type="text/javascript" th:src="@{/js/jsRender.js}"></script>
+<!--[if lt IE 9]>
+    <link href="css/ie8.css" rel="stylesheet">
+	<![endif]-->
+<script id="detail" type="text/x-jsrender">
+	{{for}}
+	{{if isBigLogo}}
+	  	<li class="scale-shop">
+                        	<div class="item-box clearfix">
+                                <div class="sp-logo"><img src="{{>imgHref}}" /></div>
+                                <div class="sp-msg">
+                               		<div class="sp-name">{{>name}} </div>
+                                    <div class="sp-addr"><i class="icon icon-addr"></i>{{>key}}</div>
+                                    <div class="sp-tel"><i class="icon icon-stel"></i>{{>phone}}</div>
+                                    <div class="sp-time"><i class="icon icon-time"></i>{{>businessHour}}</div>
+                                </div>
+                            </div>                            
+                            <div class="sp-pic">
+                            	<img src="{{>shopImg}}" width="200" height="170" />
+                                <img src="{{>shopImg2}}" width="200" height="170" />
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="sp-info">
+                            	{{>descpriton}}
+                            </div>
+                        </li>	
+		
+	{{else}}
+  		<li>
+			<div class="item-box clearfix">
+				<div class="sp-logo"><img src="{{>imgHref}}" /></div>
+				<div class="sp-msg">
+    				<div class="sp-name">{{>name}}</div>
+    				<div class="sp-addr"><i class="icon icon-addr"></i>{{>key}}</div>
+    				<div class="sp-tel"><i class="icon icon-stel"></i>{{>phone}}</div>
+    				<div class="sp-time"><i class="icon icon-time"></i>{{>businessHour}}</div>
+				</div>                            	
+			</div>
+		</li>
+	{{/if}}
+	{{/for}}
+</script>
+</head>
+<body class="shops">
+	<div th:replace="include/header::header-shop"></div>
+	
+	<div class="wrap shop-layout">
+		<div class="shop-top">
+			<span>
+				<p class="stxt">
+					<i class="icon icon-shtime"></i>营业时间
+				</p>
+				<p class="ft16">10:00-22:00</p>
+			</span> <span>
+				<p class="stxt">
+					<i class="icon icon-shtel"></i>客服电话
+				</p>
+				<p class="ft16">010-259874156</p>
+			</span>
+		</div>
+		<div class="s-nav">
+			<a class="active">L1</a> <a>L2</a> <a>L3</a> <a>L4</a> <a>L5</a> <a>L6</a>
+		</div>
+		
+		<div class="shop-con">
+			<div class="s-floor">
+            	<div class="sp-list">
+                	<ul class="masonry js-masonry">
+                		
+                		<li th:each="shop:${shops}" th:class="${shop.isBigLogo}?'scale-shop':''">
+                			<div th:switch="${shop.isBigLogo}">
+							  
+							  <div th:case="1">
+									<div class="item-box clearfix">
+		                                <div class="sp-logo"><img th:src="${shop.imgHref}" /></div>
+		                                <div class="sp-msg">
+		                               		<div class="sp-name" th:text="${shop.name}">HotWind</div>
+		                                    <div class="sp-addr" th:text="${shop.key}"><i class="icon icon-addr"></i>#01-101</div>
+		                                    <div class="sp-tel" th:text="${shop.phone}"><i class="icon icon-stel"></i>021-1234567</div>
+		                                    <div class="sp-time" th:text="${shop.businessHour}"><i class="icon icon-time"></i>10:00am——11:00pm</div>
+		                                </div>
+		                            </div>                            
+		                            <div class="sp-pic">
+		                            	<img th:src="${shop.shopImg}" width="200" height="170" />
+		                                <img th:src="${shop.shopImg2}" width="200" height="170" />
+		                            </div>
+		                            <div class="clearfix"></div>
+		                            <div class="sp-info" th:text="${shop.descpriton}">
+		                            	<p>Hennes MauritzAB 的简称，由ErlingPersson于1947年在瑞典创立，
+		                                主要经营销售服装和化妆品。目前，HM 的发展惊人，拥有超过3000家专卖店，足迹遍布28个国家。
+		                                德国是他的最大市场，其次是瑞典和英国。由ErlingPersson于1947年在瑞典创立，主要经营销售服装和化妆品。目前，HM
+		                                的发展惊人，拥有超过3000家专卖店，足迹遍布28个国家。德国是他的最大市场，其次是瑞典和英国。</p>
+	                          		</div>
+	                          </div>
+								
+							  <div th:case="*">
+							  
+							    <div class="item-box clearfix">
+	                                <div class="sp-logo"><img th:src="${shop.imgHref}" /></div>
+	                                <div class="sp-msg">
+	                                    <div class="sp-name" th:text="${shop.name}">HM </div>
+	                                    <div class="sp-addr" th:text="${shop.key}"><i class="icon icon-addr"></i>#01-101</div>
+	                                    <div class="sp-tel" th:text="${shop.phone}"><i class="icon icon-stel"></i>021-1234567</div>
+	                                    <div class="sp-time" th:text="${shop.businessHour}"><i class="icon icon-time"></i>10:00am——11:00pm</div>
+	                                </div>                            	
+                            	</div>
+                              </div>
+							</div>
+						</li>
+                    </ul>
+                </div>
+			</div>
+			
+		</div>
+		
+	</div>
+	
+	<div th:replace="include/footer::footer-content"></div>
+	<div class="getTop"></div>
+</body>
+</html>

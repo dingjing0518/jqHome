@@ -1,0 +1,93 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>权限管理列表</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jsRender.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/page.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script id="detail" type="text/x-jsrender">
+		{{for content}}
+		<tr>
+			<td><a href="/jqCrm/admin/authorities/{{>id}}">{{>name}}</a></td>
+            <td class="{{>cssClass}}">{{>state}}</td>
+			<td>{{>endTime}}</td>
+		</tr>
+		{{/for}}
+    </script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="power-wrap container">
+            <div class="hd clearfix">
+                <div class="bar base-bar short-bar pull-left">权限管理</div>
+                <a class="btn btn-info" th:href="@{/admin/authorities?form}">添加</a>
+            </div>
+            <form class="form-inline" >
+                <div class="form-group">
+                    <label>权限名称:</label>
+                    <input class="form-control" type="text" name="name" id="name" th:value="${name}"/>
+                </div>
+                <button class="btn btn-primary btn-xs" type="submit">查找</button>
+            </form>
+            <table class="table table-striped bg-white mt25">
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>状态</th>
+                    <th>最后修改时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="a:${lists.content}">
+                    <td><a th:text="${a.name}" th:href="@{/admin/authorities/__${a.id}__}">2016元旦</a></td>
+                    <td th:text="${a.valid.toString()=='VALID'}?使用中:无效">使用中</td>
+                    <td th:text="${a.updatedTime==null?'':#calendars.format(a.updatedTime, 'yyyy-MM-dd HH:mm:ss')}">2015年10月10号 10:00</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="pagination-wrap">
+                <div th:replace="admin/layout/page::page"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var submitFn = function (data) {
+            var tmpl = $.templates("#detail");
+            var html = tmpl.render(data.obj);
+            $('table tbody').children().remove();
+            $('table tbody').html(html);
+        };
+
+        var parameterFn = function () {
+            return {};
+        };
+
+        $('ul.pagination').pageable({
+            url: global.context + '/admin/authorities/json',
+            parameter: parameterFn,
+            fn: submitFn
+        });
+    })
+</script>
+</body>
+</html>

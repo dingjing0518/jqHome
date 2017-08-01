@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no" />
+		<link type="image/x-icon" rel="shortcut icon" th:href="@{/images/logo.ico}" />
+		<link rel="Bookmark" th:href="@{/images/logo.ico}" />
+		<!--[if lt IE 9]>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,chrome=1">
+		<![endif]-->
+		<!--<meta name="viewport" content="width=device-width, initial-scale=1">
+		-->
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+		<link rel="stylesheet" href="css/non-responsive.min.css" th:href="@{/css/non-responsive.min.css}"/>
+		<link rel="stylesheet" href="css/common.css" th:href="@{/css/common.css}"/>
+		<link rel="stylesheet" href="css/swiper.min.css" th:href="@{/css/swiper.min.css}"/>
+		<link rel="stylesheet" type="text/css" href="css/jq.css" th:href="@{/css/jq.css}"/>
+		<link rel="stylesheet" href="css/wap.css" th:href="@{/css/wap.css}"/>
+        <link rel="stylesheet" media="screen and (max-width:700px)" href="css/moblie.css" th:href="@{/css/moblie.css}" />
+		<script type="text/javascript" src="js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+		<script type="text/javascript" src="js/swiper.jquery.min.js" th:src="@{/js/swiper.jquery.min.js}"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" src="js/wookmark.js" th:src="@{/js/wookmark.js}"></script>
+		<script type="text/javascript" src="js/imagesloaded.pkgd.min.js" th:src="@{/js/imagesloaded.pkgd.min.js}"></script>
+		<script type="text/javascript" src="js/script.js" th:src="@{/js/script.js}"></script>
+		<title>金桥太茂官方网站-品牌</title>
+	</head>
+	<body style="padding-top:96px;" class="pt0">
+		
+		<header th:replace="include/header::header-brand"></header>
+		<div th:replace="include/header::brand-all-title"></div>
+		<div th:replace="include/header::brand-all-nav"></div>
+		
+		<div class="contain sitecontent transform">
+			<div class="wookmark-list hoverscale">
+					<div class="activity tile-loading" th:each="brand,iterStat:${brands}"><img th:src="${brand.isAllBigImg==1}?${brand.bigImg}:${brand.smallImg}" alt="" /><div class="text-bottom"><p class="tb-t" th:utext="${brand.name}">G-super</p><p class="tb-d" th:utext="${brand.address}">B1-001</p></div></div>
+			</div>
+		</div>
+		
+		<div th:replace="include/footer::footer-brand"></div>
+		<div id="share_pc"></div>
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan style='display:none;' id='cnzz_stat_icon_1260372833'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D1260372833' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</body>
+	<script type="text/javascript" th:src="@{/js/brand/index.js}">
+	</script>
+	<script type="text/javascript">
+		var loadedImages = 0, // Counter for loaded images
+		container = '.wookmark-list',
+		$container = $(container), 
+		tileCount = 30, wookmark;
+	</script>
+</html>

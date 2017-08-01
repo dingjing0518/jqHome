@@ -1,0 +1,193 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>会员卡</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jsRender.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/page.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script id="detail" type="text/x-jsrender">
+        <div class="msg-wrap">
+            <div class="top-meun">
+                <a class="close-btn">
+                    <img src="/jqCrm/img/icon-close.png" width="20" height="20"/>
+                </a>
+				{{if state=='VALID'}}
+                <a class="btn btn-info pull-right" href="/jqCrm/admin/members/{{:id}}/member?form">添加成员</a>
+				{{/if}}
+            </div>
+            <a href="/jqCrm/admin/cards/{{:id}}">
+                <div class="bar state-bar">
+                    使用情况
+                    <img src="/jqCrm/img/card-icon.png" width="20" height="20" style="float: right;margin-right: 15px; margin-top: 12px;" />
+                </div>
+            </a>
+            <div class="group use-state">
+                <div class="group-list">
+                    <label>状态</label>
+                    <div class="succees">{{if state=='VALID'}}有效{{else}}无效{{/if}}</div>
+                </div>
+                <div class="group-list">
+                    <label>当前会员数</label>
+                    <div class="succees">{{:total}}</div>
+                </div>
+            </div>
+            <a href="/jqCrm/admin/cards/{{:id}}">
+                <div class="bar edit-bar">
+                    基本信息
+                    <img src="/jqCrm/img/card-icon.png" width="20" height="20" style="float: right;margin-right: 15px; margin-top: 12px;" />
+                </div>
+            </a>
+            <div class="group base-info">
+                <div class="group-list">
+                    <label>名称</label>
+                    <div>{{:name}}</div>
+                </div>
+                <div class="group-list">
+                    <label>背景图</label>
+                    <div class="ml">
+                        <img src="{{:imgHref}}" width="300" height="210"/>
+                    </div>
+                </div>
+                <div class="group-list">
+                    <label>初始积分</label>
+                    <div>
+                        {{:initScore}}
+                    </div>
+                </div>
+                <div class="group-list">
+                    <label>描述</label>
+                    <div>
+                        {{:summary}}
+                    </div>
+                </div>
+            </div>
+            <div class="bar state-bar">积分规则</div>
+            <div class="group point-rule">
+                <div class="alert alert-danger" role="alert">
+                    提示！<br/>
+                    当规则同时生效时，取获得积分最高的规则。
+                </div>
+                <div class="pit-hd">注册</div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                        <th>额外积分</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{for register}}
+                    <tr>
+                        <td>{{>beginTime}}</td>
+                        <td>{{>endTime}}</td>
+                        <td>{{>score}}</td>
+                    </tr>
+                    {{/for}}
+                    </tbody>
+                </table>
+                <div class="pit-hd">交易</div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                        <th>交易倍率</th>
+                        <th>额外积分</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{for trading}}
+                    <tr>
+                        <td>{{>beginTime}}</td>
+                        <td>{{>endTime}}</td>
+                        <td>{{>rate}}</td>
+                        <td>{{>score}}</td>
+                    </tr>
+                    {{/for}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </script>
+    <script>
+        $(function () {
+            $('.mem-list li').click(function (e) {
+                var self = $(this);
+                $.ajax({
+                    url: global.context+'/admin/cards/' + self.attr('data-card-id')+'/json',
+                    success: function (data) {
+                    	data.obj.id = self.attr('data-card-id');
+                        if (data.status == 'success') {
+                            var tmpl = $.templates("#detail");
+                            var html = tmpl.render(data.obj);
+                            $('.card-detail-wrap').css('right', '0').html(html);
+                        }
+                    }
+                });
+            });
+            $('body').on('click', '.close-btn', function () {
+                $('.card-detail-wrap').css('right', '-350px')
+            })
+        })
+    </script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="member-wrap container">
+            <div class="hd clearfix">
+                <div class="bar using-bar short-bar pull-left">使用中</div>
+                <a th:href="@{/admin/cards?form}" class="btn btn-info">添加</a>
+            </div>
+            <div class="list mem-list">
+                <ul class="clearfix">
+                    <li th:each="c:${valid}" th:attr="data-card-id=${c.id}">
+                        	<div style="position: relative; width: 300px; height: 210px;">
+	                            <img th:src="@{${c.imgHref}}" width="300px" height="210px"/>
+	                            <span style="position: absolute; top: 0; left: 0;font-size:20px;color:white;" th:text="${c.name}"></span>
+	                            <span style="position: absolute; top: 21px; left: 0;font-size:20px;color:white;" th:text="'当前会员数：'+${c.members}"></span>
+                            </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="hd">
+                <div class="bar close-bar">已关闭</div>
+            </div>
+            <div class="list mem-list">
+                <ul class="clearfix">
+                    <li th:each="c:${inValid}" th:attr="data-card-id=${c.id}">
+                    	<div style="position: relative; width: 300px; height: 210px;">
+	                        <img th:src="@{${c.imgHref}}" width="300px" height="210px"/>
+	                        <span style="position: absolute; top: 0; left: 0;font-size:20px;color:white;" th:text="${c.name}"></span>
+	                            <span style="position: absolute; top: 21px; left: 0;font-size:20px;color:white;" th:text="'当前会员数：'+${c.members}"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card-detail-wrap">
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

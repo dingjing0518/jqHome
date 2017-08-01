@@ -1,0 +1,122 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>添加停车券</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.theme.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/fileUpload.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/count.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/validate.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/ckeditor/ckeditor.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/ckeditor/adapters/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/datepicker-zh-CN.js}"></script>
+    <script type="text/javascript" th:src="@{/js/parkingCoupon/create.js}"></script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="add-carquan-wrap">
+            <div class="hd">
+                <div class="bar add-bar">添加停车券</div>
+            </div>
+            <div class="row">
+                <form class="form-horizontal pt50" id="form" th:object="${coupon}" th:method="post">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label required">名称：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{name}" placeholder="4-20个字符"/>
+	                        <label class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect date</label>
+                        </div>
+                    </div>
+                    <div class="form-group upload">
+                        <label class="col-md-3 control-label">列表图：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{coverImg}}" alt="点击上传"/>
+                            <input type="file" id="imgUp1"/>
+                            <input type="hidden" th:field="*{coverImg}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-3 control-label"></label>
+                    	<label class="col-md-4 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：578像素 * 190像素</label>
+                    </div>
+                    <div class="form-group upload">
+                        <label class="col-md-3 control-label">背景图：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{contentImg}}" alt="点击上传"/>
+                            <input type="file" id="imgUp2"/>
+                            <input type="hidden" th:field="*{contentImg}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-3 control-label"></label>
+                    	<label class="col-md-4 red">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：640像素 * 340像素</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label required">兑换积分：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{score}"/>
+                        </div>
+                        <p class="error" th:if="${#fields.hasErrors('score')}" th:errors="*{score}">Incorrect date</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">核销截止日期：</label>
+                        <div class="col-md-3">
+                            <input class="form-control datepicker " placeholder="" type="text"
+                                   th:field="*{couponEndTime}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">生效日期：</label>
+                        <div class="col-md-2 text-center">
+                            开始
+                            <input class="form-control datepicker " placeholder="开始日期应早于结束日期" type="text" th:field="*{beginTime}"/>
+                        	<span class="red">*不填代表长期有效</span>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            结束
+                            <input class="form-control datepicker " placeholder="结束日期应晚于开始日期" type="text" th:field="*{endTime}"/>
+                        	<span class="red">*不填代表长期有效</span>
+                        </div>
+                        <p class="error" th:if="${#fields.hasErrors('beginTime')}" th:errors="*{beginTime}">Incorrect
+                            date</p>
+                        <p class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}">Incorrect
+                            date</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">描述：</label>
+                        <div class="col-md-7">
+                            <textarea class="form-control" rows="6" th:field="*{summary}">123</textarea>
+                        </div>
+                        <p class="error" th:if="${#fields.hasErrors('summary')}" th:errors="*{summary}">Incorrect
+                            date</p>
+                    </div>
+                    <div class="group-ft col-xs-offset-4 mt50">
+                        <a th:href="@{/admin/parkingCoupons}" class="btn btn-default ml40">返回</a>
+                        <input type="submit" class="btn btn-success ml40" value="确认"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

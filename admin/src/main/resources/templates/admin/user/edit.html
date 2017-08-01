@@ -1,0 +1,85 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>用户详情</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.theme.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/confirm.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script type="text/javascript" th:src="@{/js/user/edit.js}"></script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="user-datil-wrap container">
+            <div class="hd clearfix">
+                <div class="bar state-bar short-bar pull-left">用户状态</div>
+                <form th:method="put" th:action="@{/admin/users/__${user.id}__/validate}" id="validForm">
+                	<input id='validate-button' type="submit"  th:class="${user.valid.toString()=='VALID'}? 'btn btn-open' : 'btn btn-close' "  th:attr="data-id=${user.id}" th:value="${user.valid.toString()=='VALID'}?关闭:开启"/>
+                </form>
+            </div>
+            <div class="form-group padd30">
+                <label class="col-md-4 control-label text-right">状态：</label>
+                <div class="col-md-3 pl50 pt3 text-success" th:text="${user.valid.toString()=='VALID'}?使用中:无效">
+                    使用中
+                </div>
+            </div>
+            <div class="hd">
+                <div class="bar edit-bar">用户设置</div>
+            </div>
+            <div th:if="${message!=null}" th:class="${message.status}" th:text="${message.message}"></div>
+            <div class="show-msg">
+                <form class="form-horizontal pt50" th:object="${user}" id="form" th:attr="data-id=${user.id}" th:method="put">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">用户名：</label>
+                        <div class="col-md-3" th:text="*{name}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">密码：</label>
+                        <div class="col-md-3">
+                            <input type="password" class="form-control" th:field="*{password}"  th:value="${user.password}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">权限配置：</label>
+                        <div class="col-md-3">
+                            <div class="checkbox" th:each="a:${authorities}">
+                                <label>
+                                    <input type="checkbox" th:field="*{userAuthorities}" th:value="${a.id}"/>
+                                    <span th:text="${a.name}"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-ft col-xs-offset-4 mt50">
+                        <a th:href="@{/admin/users}" class="btn btn-default ml-40">返回</a>
+                        <input type="submit" class="btn btn-success ml-40" value="确认" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dialog-confirm" title="" th:attr="title=${user.valid.toString()==valid}?'是否确认关开启用户':'是否确认关闭该用户'">
+  <p th:text="${user.name}"></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* CSS Document */
+body{overflow-x:auto;}
+.wrap{width:1420px;}
+.moudle-wrap {
+    width: 1220px;
+}
+.footer .content-box{
+	width:1420px;
+}

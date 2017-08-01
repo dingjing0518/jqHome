@@ -1,0 +1,77 @@
+@media screen and (max-width:1226px)
+{
+	body
+	{
+		min-width:0;
+	}
+	
+	.contain,.innerFoot, .innerHeader, section, .filmheader
+	{
+		width:100%;
+	}
+	ul.list
+	{
+		width:1000px;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	ul.list > div
+	{
+		width:480px;
+	}
+	
+	.plation.right
+	{
+		right:10%;
+	}
+	.plation.left
+	{
+		left:10%;
+	}
+	ul.list > div.hot span
+	{
+		width:16%;
+	}
+}
+@media screen and (max-width:1000px)
+{
+	ul.list
+	{
+		width:90%;
+		
+	}
+	ul.list > div
+	{
+		width:100%;
+	}
+	footer,.innerFoot
+	{
+		height:75px;
+	}
+	.innerFoot span.ba
+	{
+		display: block;
+		position: absolute;
+		left:0px;
+		right:0px;
+		bottom:0px;
+		
+	}
+	.innerFoot .shareTool
+	{
+		left:0px;
+	}
+}
+@media screen and (max-width:602px)
+{
+	ul.list
+	{
+		width:90%;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	footer
+	{
+		margin-top:20px;
+	}
+}

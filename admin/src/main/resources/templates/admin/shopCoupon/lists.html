@@ -1,0 +1,113 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>店铺券列表</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.theme.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/bootstrap-timepicker.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jsRender.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/page.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/validate.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/datepicker-zh-CN.js}"></script>
+    <script type="text/javascript" th:src="@{/js/shopCoupon/list.js}"></script>
+    <script id="detail" type="text/x-jsrender">
+		{{for content}}
+		<tr>
+			<td><a href="/crm/admin/shopCoupons/{{>id}}">{{>name}}</a></td>
+			<td>{{>amount}}</td>
+			<td>{{>score}}</td>
+			<td>{{>beginTime}}</td>
+			<td>{{>endTime}}</td>
+			<td>{{>total}}</td>
+			<td>{{>shopName}}</td>
+			<td class="{{>cssClass}}">{{>state}}</td>
+		</tr>
+		{{/for}}
+    </script>
+</head>
+
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+
+    <div class="mainpanel">
+        <div class="shop-wrap container">
+            <div class="hd clearfix">
+                <div class="bar base-bar short-bar pull-left">店铺券</div>
+                <a th:href="@{/admin/shopCoupons?form}" class="btn btn-info">添加</a>
+            </div>
+            <form class="form-inline" th:object="${form}" id="queryForm">
+                <div class="form-group">
+                    <label>状态</label>
+                    <select class="form-control w120" th:field="*{state}">
+                        <option value="">全部</option>
+                        <option value="USING">使用中</option>
+                        <option value="CLOSED">已关闭</option>
+                        <option value="EXPIRE">已过期</option>
+                        <option value="NOEXPIRE">未生效</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>店铺</label>
+                    <select class="form-control w120" th:field="*{shop}">
+                        <option value="">全部</option>
+                        <option th:each="s : ${shops}" th:value="${s.id}" th:text="${s.name}">name</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>生效日期</label>
+                    <input class="form-control datepicker " placeholder="" type="text" th:field="*{beginTime}"/> -
+                    <input class="form-control datepicker " placeholder="" type="text" th:field="*{endTime}"/>
+                </div>
+                <input type="submit" class="btn btn-primary btn-xs" value="查找"/>
+            </form>
+
+            <table class="table table-striped bg-white">
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>卡券金额</th>
+                    <th>兑换积分</th>
+                    <th>生效日期</th>
+                    <th>失效日期</th>
+                    <th>数量</th>
+                    <th>所属店铺</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="c:${lists.content}">
+                    <td><a th:text="${c.name}" th:href="@{/admin/shopCoupons/__${c.id}__}">2016元旦</a></td>
+                    <td th:text="${c.amount}"></td>
+                    <td th:text="${c.score}"></td>
+                    <td th:text="${c.beginTime}"></td>
+                    <td th:text="${c.endTime}"></td>
+                    <td th:text="${c.total}"></td>
+                    <td th:text="${c.shopName}"></td>
+                    <td th:class="${c.cssClass}" th:text="${c.state}">使用中</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="pagination-wrap">
+                <div th:replace="admin/layout/page::page"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

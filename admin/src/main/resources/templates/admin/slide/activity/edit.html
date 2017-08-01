@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0,  maximum-scale=1.0"/>
+    <title>活动视频管理</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-override.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui-1.10.3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/template.css}"/>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery-ui-1.10.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/template.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/fileUpload.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/global.js}"></script>
+    <script type="text/javascript" th:src="@{/js/activitySlide/edit.js}"></script>
+</head>
+<body>
+<div class="header clearfix">
+    <div th:replace="admin/layout/header::header"></div>
+</div>
+<div class="mainwrapper clearfix">
+    <div th:replace="admin/layout/menu::menu"></div>
+    <div class="mainpanel">
+        <div class="add-giftquan-wrap">
+            <div class="hd">
+                <div class="bar edit-bar">修改视频</div>
+            </div>
+            <div th:if="${message!=null}" th:class="${message.status}" th:text="${message.message}"></div>
+            <div class="row">
+                <form class="form-horizontal pt50" id="form" th:object="${activitySlide}" th:method="put" th:attr="data-id=${activitySlide.id}">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">视频名称：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{vedioName}" />
+                        </div>
+                    </div>
+                          <div class="form-group">
+                        <label class="col-md-4 control-label">视频url：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{vedioUrl}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label required">视频默认图片：</label>
+                        <div class="col-md-5">
+                            <img th:src="@{*{coverImg}}" alt="点击上传"/>
+                            <input type="hidden" th:field="*{coverImg}"/>
+                            <input type="file" id="imageUp2"/>
+                            <i class="error" th:if="${#fields.hasErrors('coverImg')}" th:errors="*{coverImg}">必填</i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+  						<label class="col-md-4 control-label"></label>
+                    	<label class="col-md-4 red" id="imgTip">请上传小于1MB文件大小的图片，图片仅限PNG、JPG格式<br/>建议尺寸：692像素 * 830像素</label>
+                    </div>        
+                  
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">序号：</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" th:field="*{sort}"  placeholder="序号越小越靠前"/>
+                        </div>
+                    </div>
+                    <div class="group-ft col-xs-offset-4 mt50">
+                       	<a th:href="@{/admin/slides/activity}" class="btn btn-default">返回</a>
+                        <input type="submit" class="btn btn-success ml-40" value="确认"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="alert" th:if="${status}!=null" th:class="${status.status}">
+    <div class="success-modal">
+        <div class="show-msg">
+            <div class="alert alert-success" role="alert" th:text="${status.message}">视频更新成功</div>
+            <div class="success-bg"><img th:src="@{/img/icon-success.jpg}"/></div>
+        </div>
+    </div>
+    <div class="fixed"></div>
+</div>
+</body>
+</html>
